@@ -16,7 +16,10 @@ struct
 		toolBarHeight=60,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 		toolbarItemWidth = 70,			//Width of each icon in toolbar
 		statusBarHeight=50;	//Status Bar Height
-	
+		//new by ebrahim
+		int GameStatusHeight = 30,
+		GameStatusWidth = 1100,
+		seprator=13;	//Game status width and highet and seprator that keep verticl distance btween texts
 	int remainingHeight = windHeight - toolBarHeight - statusBarHeight;
 
 	int gridHeight = int(remainingHeight * (2 / 3.0)); 		//The grid is where bricks can be drawn
