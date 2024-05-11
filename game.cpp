@@ -99,45 +99,6 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 	return op;
 }
 
-//operation* game::createMoveOperation(keytype clickedArrow)
-//{
-//	char cKeyData = clickedArrow;
-//	//operation* op2 = nullptr;
-//	switch (cKeyData)
-//	{
-//	case 1:
-//		//testWindow.DrawString(5, 30, "The End key was pressed.");
-//
-//		break;
-//	case 2:
-//		//testWindow.DrawString(5, 30, "The Down Arrow key was pressed.");
-//
-//		break;
-//	case 3:
-//		//testWindow.DrawString(5, 30, "The Page Down key was pressed.");
-//		break;
-//	case 4:
-//		//testWindow.DrawString(5, 30, "The Left Arrow key was pressed.");
-//		break;
-//	case 5:
-//		//testWindow.DrawString(5, 30, "The Center Keypad key was pressed.");
-//		break;
-//	case 6:
-//		//testWindow.DrawString(5, 30, "The Right Arrow key was pressed.");
-//		break;
-//	case 7:
-//		//testWindow.DrawString(5, 30, "The Home key was pressed.");
-//		break;
-//	case 8:
-//		//testWindow.DrawString(5, 30, "The Up Arrow key was pressed.");
-//		break;
-//	case 9:
-//		//testWindow.DrawString(5, 30, "The Page Up key was pressed.");
-//	}
-//	return op2;
-//}
-
-//////////////////////////////////////////////////////////////////////////////////////////
 
 void game::printMessage(string msg) const	//Prints a message on status bar
 {
@@ -183,26 +144,6 @@ string game::getSrting() const
 	}
 }
 
-
-//ARROWS operMove::getPressedArrow(ARROWS clickedArrow)
-//{
-//	if (clickedArrow == RightArrow)
-//		return RightArrow;
-//	else if (clickedArrow == LeftArrow)
-//		return LeftArrow;
-//	else if (clickedArrow == UpArrow)
-//		return UpArrow;
-//	else if (clickedArrow == DownArrow)
-//		return DownArrow;
-//}
-
-
-//operation* game::createMoveOperation(char cKey)
-//{
-//	operation* op2 = nullptr;
-//
-//	
-//}
 
 
 
@@ -253,11 +194,10 @@ void game::run()
 		// you can make an if condition if the move icon clicked make the same operations.
 		else // this should Allow you to move the object after clicked anywhere on the grid (away from the toolbar)
 		{
-			//pWind->SetBuffering(true);
+			
 			bool stillMoving = true;
 			do {
 
-				//pWind->SetBuffering(true);
 				keytype ktinput;
 				char anotherKey;
 				operMove* op2;
@@ -293,32 +233,17 @@ void game::run()
 				}
 				else if (ktinput == ESCAPE)
 				{
-					std::cout << ktinput << endl;
-					std::cout << "stillMoving is true!" << endl;
 					stillMoving = false;
 				}
 
 
-				/*if (ktinput == ASCII) {
-					stillMoving = false;
-					std::cout << "stillMoving is false" << endl;
-					
-				}
-				else
-				{
-					std::cout << ktinput << endl;
-					std::cout << "stillMoving is true!" << endl;
-					stillMoving = true;
-				}*/
+			
 				
 				shapesGrid->draw();
 				//pWind->UpdateBuffer();
 				pWind->FlushMouseQueue();
 				pWind->FlushKeyQueue();
 			} while (stillMoving);
-			//pWind->SetBuffering(false);
-
-			std::cout << "while is disabled" << endl;
 
 			
 		}
