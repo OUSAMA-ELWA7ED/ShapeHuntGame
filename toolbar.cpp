@@ -1,11 +1,16 @@
 #include "toolbar.h"
 #include "game.h"
 //#include "grid.h"
-
+#include <string>
+using namespace std;
+#include "CMUgraphicsLib\CMUgraphics.h"
 
 ////////////////////////////////////////////////////  class toolbar   //////////////////////////////////////////////
 toolbar::toolbar(game* pG)
-{	
+{
+	live = 5;
+	score = 0;
+	level = 0;
 	height = config.toolBarHeight;
 	width = config.windWidth;
 	this->pGame = pG;
@@ -27,11 +32,11 @@ toolbar::toolbar(game* pG)
 	toolbarItemImages[ITM_I] = "images\\toolbarItems\\I_Shape.jpg";
 	toolbarItemImages[ITM_HOUSE] = "images\\toolbarItems\\shape_pentagon.jpg";
 	toolbarItemImages[ITM_Rect] = "images\\toolbarItems\\Rect.jpg";
+	//by ebrahim
 	toolbarItemImages[ITM_Rocket] = "images\\toolbarItems\\Rocket.jpg";
 	toolbarItemImages[ITM_Blender] = "images\\toolbarItems\\Blender.jpg";
 	toolbarItemImages[ITM_Env] = "images\\toolbarItems\\Envelop.jpg";
 	toolbarItemImages[ITM_Cap] = "images\\toolbarItems\\Cap.jpg";
-
 
 	//TODO: Prepare image for each toolbar item and add it to the list
 
@@ -70,4 +75,5 @@ toolbarItem toolbar::getItemClicked(int x)
 	return (toolbarItem)(x / config.toolbarItemWidth);
 
 }
+
 
