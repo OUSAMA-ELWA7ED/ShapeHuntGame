@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-
+#include "gameConfig.h"
 using namespace std;
 #include "CMUgraphicsLib\CMUgraphics.h"
 
@@ -9,45 +9,66 @@ class game;     //forward declaration
 struct point
 {
 	int x, y;
-	
-	// ==============> Applying rotation function <===============
+
+
 	void rotate(point ref)
 	{
 
-		x -= ref.x;
-		y -= ref.y;
 
-		int temp = x;
-		x = -y;
-		y = temp;
+		int temp_virtual;  // virtual means that I want to test the result before use it.
+		int x1 = x, y1 = y; // transformation matrix ==> 
+		x1 -= ref.x;
+		y1 -= ref.y;
+		temp_virtual = x1;
+		x1 = -y1;
+		y1 = temp_virtual;
+		x1 += ref.x;
+		y1 += ref.y;
+		bool what = isItExceeded(x1, y1);
+		if (isItExceeded(x1, y1) == false) {
+			x -= ref.x;
+			y -= ref.y;
 
-		x += ref.x;
-		y += ref.y;
-		
-	}
-	// =====================> Applying flipping function to each point individually <================
-	
-	// ======================>Implementation of moving horizontally function <==========================
-	void move(int step, bool isVertically=false) // move(30, true)
-	{
-		if (isVertically)
-			y += step;
+			int temp = x;
+			x = -y;
+			y = temp;
+
+			x += ref.x;
+			y += ref.y;
+		}
 		else
-			x += step;
+			return;
+	}
+	void move(int step,bool isVertical)
+	{
+		int x1 = x, y1 = y;
+		x1 += config.gridSpacing; y1 += config.gridSpacing;
+
+		if (isItExceeded(x1, y1) == false) {
+			if (isVertical == false)
+				x += step; //int = 30;
+			else if (isVertical == true)
+				y += step;
+		}
+		else
+			return;
 	}
 
-	void flip(point lowestPoint)
+	void flip(point pnt)
 	{
 		int temp = y;
-		y = lowestPoint.y;
-		lowestPoint.y = temp;
+		y = pnt.y;
+		pnt.y = temp;
+
 	}
 
-	/*void moveVertically()
+	bool isItExceeded(int xs, int ys)
 	{
-		int const movementStep = 10;
-		y += movementStep;
-	}*/
+		if (xs > config.windWidth || xs < 0 || ys < 0 || ys > config.windHeight)
+			return true;
+		else
+			return false;
+	}
 
 
 };

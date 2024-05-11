@@ -79,7 +79,7 @@ void I_Shape::draw()
 
 void I_Shape::calcCorners() {}
 
-House::House(game* r_pGame, point ref) : shape(r_pGame, ref)
+cHouse::cHouse(game* r_pGame, point ref) : shape(r_pGame, ref)
 {
 	baseRef = ref;
 	headRef = { ref.x, ref.y - config.House.baseHeight / 2 };
@@ -89,7 +89,7 @@ House::House(game* r_pGame, point ref) : shape(r_pGame, ref)
 	//test = new circle(pGame, headRef, 50);
 }
 
-void House::draw() 
+void cHouse::draw()
 {
 
 	base->draw();
@@ -99,13 +99,13 @@ void House::draw()
 	//test->draw();
 }
 
-void House::calcCorners() {}
+void cHouse::calcCorners() {}
 void Rocket::calcCorners() {}
 void Blender::calcCorners() {}
 void Envelope::calcCorners() {}
 void Cap::calcCorners() {}
 
-void House::rotate()
+void cHouse::rotate()
 {
 	base->rotate();
 	//head->rotate();
@@ -116,7 +116,7 @@ void House::rotate()
 
 }
 
-void House::move(int step, bool isVerical) {}
+void cHouse::move(int step, bool isVerical) {}
 
 //void House::move(){}
 
@@ -302,7 +302,7 @@ void Cap::move(int step, bool isVerical){}
 
 
 void Sign::flip() {}
-void House::flip() 
+void cHouse::flip()
 {
 	point* mine = base->getLowerBottom();
 	head->getUpperPoint()->flip(*base->getLowerBottom());

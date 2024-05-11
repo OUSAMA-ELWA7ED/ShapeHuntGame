@@ -4,7 +4,14 @@
 #include "operations.h"
 #include "grid.h"
 
-
+enum Levels
+{
+	LVL1 = 1,
+	LVL2,
+	LVL3,
+	LVL4,
+	LVL5,
+};
 
 //Main class that coordinates the game operation
 class game
@@ -13,9 +20,11 @@ class game
 	/// Add more members if needed
 
 	toolbar* gameToolbar;
-	//operMove* game_ShapeMovement;
+
 	window* pWind;	//Pointer to the CMU graphics window
 	grid* shapesGrid;
+	window* ExitWindow;
+	Levels* lvl;
 
 public:
 	game();
@@ -32,10 +41,10 @@ public:
 	grid* getGrid() const;		//returns a pointer to the shapes grid
 
 	//creates an operation according to the toolbar item clicked
-	operation* createRequiredOperation(toolbarItem clickedItem);
-	//operation* createMoveOperation(keytype clickedArrow);
+	//operation* createRequiredOperation(toolbarItem clickedItem);
+	Levels* getLevel();
+	void setLevel(Levels level);
 
-	//ARROWS getPressedArrow(ARROWS clickedArrow);
 	void run();	//start the game
 
 };

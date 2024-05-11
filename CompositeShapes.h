@@ -58,7 +58,7 @@ public:
 	//virtual void move() override;
 };
 
-class House : public shape
+class cHouse : public shape
 {
 	Rect* base;
 	Isso_triangle* head;
@@ -66,7 +66,7 @@ class House : public shape
 	point headRef;
 	//circle* test;
 public:
-	House(game* r_pGame, point ref);
+	cHouse(game* r_pGame, point ref);
 	virtual void draw();
 	virtual void calcCorners() override;
 	virtual void move(int step, bool isVerical) override;

@@ -41,8 +41,7 @@ void Rect::draw()
 
 void Rect::resize()
 {
-	height * 2;
-	width * 2;
+	
 }
 
 void Rect::rotate()

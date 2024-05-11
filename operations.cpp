@@ -1,10 +1,6 @@
 #include "operations.h"
 #include "game.h"
 #include "CompositeShapes.h"
-#include <time.h>
-#include <cstdlib>
-#include "gameConfig.h"
-
 
 
 
@@ -43,7 +39,7 @@ void operAddSign::Act()
 	//take the aligned point as the sign shape ref point
 	point signShapeRef = { xGrid, yGrid };
 	//create a sign shape ==========================================> what's the purpose of the pointer to object shape
-	shape* psh = new class Sign(pGame, signShapeRef);
+	shape* psh = new Sign(pGame, signShapeRef);
 	
 	//Add the shape to the grid
 	grid* pGrid = pGame->getGrid();
@@ -105,7 +101,7 @@ void operAddHouse::Act()
 	point House_ShapeRef = { xGrid, yGrid };
 
 	//create a sign shape ==========================================> what's the purpose of the pointer to object shape
-	shape* pHouse = new class House(pGame, House_ShapeRef);
+	shape* pHouse = new cHouse(pGame, House_ShapeRef);
 
 	//Add the shape to the grid
 	grid* pGrid = pGame->getGrid();
@@ -138,7 +134,7 @@ void operAddRocket::Act()
 	point Rocket_ShapeRef = { xGrid, yGrid };
 
 	//create a sign shape ==========================================> what's the purpose of the pointer to object shape
-	shape* pRocket = new class Rocket(pGame, Rocket_ShapeRef);
+	shape* pRocket = new Rocket(pGame, Rocket_ShapeRef);
 
 	//Add the shape to the grid
 	grid* pGrid = pGame->getGrid();
@@ -167,7 +163,7 @@ void operAddBlender::Act()
 	point Blender_ShapeRef = { xGrid, yGrid };
 
 	//create a sign shape ==========================================> what's the purpose of the pointer to object shape
-	shape* pBlender = new class Blender(pGame, Blender_ShapeRef);
+	shape* pBlender = new Blender(pGame, Blender_ShapeRef);
 
 	//Add the shape to the grid
 	grid* pGrid = pGame->getGrid();
@@ -195,7 +191,7 @@ void operAddEnv::Act()
 	point Env_ShapeRef = { xGrid, yGrid };
 
 	//create a sign shape ==========================================> what's the purpose of the pointer to object shape
-	shape* pEnv = new class Envelope(pGame, Env_ShapeRef);
+	shape* pEnv = new Envelope(pGame, Env_ShapeRef);
 
 	//Add the shape to the grid
 	grid* pGrid = pGame->getGrid();
@@ -225,7 +221,7 @@ void operAddCap::Act()
 	point Cap_ShapeRef = { xGrid, yGrid };
 
 	//create a sign shape ==========================================> what's the purpose of the pointer to object shape
-	shape* pCap = new class Cap(pGame, Cap_ShapeRef);
+	shape* pCap = new Cap(pGame, Cap_ShapeRef);
 
 	//Add the shape to the grid
 	grid* pGrid = pGame->getGrid();
@@ -255,43 +251,34 @@ void operMakeRotation::Act()
 	pGrid->draw();
 }
 
-operMove::operMove(game* r_pGame) : operation(r_pGame)
+
+
+operMove::operMove(game* r_pGame, int stp) : operation(r_pGame)
 {
-
+	step = stp;
 }
-//ARROWS operMove::getPressedArrow(ARROWS clickedArrow)
-//{
-//	if (clickedArrow == RightArrow)
-//		return RightArrow;
-//	else if (clickedArrow == LeftArrow)
-//		return LeftArrow;
-//	else if (clickedArrow == UpArrow)
-//		return UpArrow;
-//	else if (clickedArrow == DownArrow)
-//		return DownArrow;
-//}
-
 
 void operMove::Act()
 {
-	
-}
-
-void operMove::RealAct(int step, bool isVertical)
-{
-	window* pMove = pGame->getWind();
+	//window* pWind = pGame->getWind();
 	grid* pGrid = pGame->getGrid();
 	pGrid->getActiveShape()->move(step, isVertical);
-	pGrid->draw();
 }
 
+void operMove::isItVertical(bool isIt)
+{
+	isVertical = isIt;
+}
 
+void operMove::moveStep(int stp)
+{
+	step = stp;
+}
 
 operFlip::operFlip(game* r_pGame) : operation(r_pGame)
 {
 
 }
-
 
 void operFlip::Act()
 {
@@ -315,30 +302,4 @@ void operDeleteThisShape::Act()
 
 
 
-//operAddRect::operAddRect(game* r_pGame) : operation(r_pGame)
-//{
-//}
-//
-//void operAddRect::Act()
-//{
-//	window* pRectt = pGame->getWind();
-//
-//	//TODO:
-//	// Don't allow adding new shape if there is alreday an active shape
-//
-//
-//	//align reference point to the nearest grid point
-//
-//	int xGrid = (config.RefX);
-//	int yGrid = (config.RefY);
-//
-//	//take the aligned point as the sign shape ref point
-//	point rectRef = { xGrid, yGrid };
-//
-//	//create a sign shape ==========================================> what's the purpose of the pointer to object shape
-//	shape* pRec = new class Rect(pGame, rectRef, config.Rectangle.Height,config.Rectangle.Width);
-//
-//	//Add the shape to the grid
-//	grid* pGrid = pGame->getGrid();
-//	pGrid->setActiveShape(pRec);
-//}
+

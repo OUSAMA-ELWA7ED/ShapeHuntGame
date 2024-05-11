@@ -79,11 +79,14 @@ public:
 
 class operMove : public operation
 {
-		
+	//int step = config.gridSpacing;
+	bool isVertical;
+	int step;
 public:
-	operMove(game* r_pGame);
+	operMove(game* r_pGame, int stp = 0);
 	virtual void Act();
-	virtual void RealAct(int step, bool isVertical);
+	void isItVertical(bool isIt); // set isVertical
+	void moveStep(int stp);
 };
 
 class operFlip :public operation
