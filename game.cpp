@@ -173,6 +173,8 @@ void game::run()
 	do
 	{
 		pWind->WaitMouseClick(x, y);
+		//new by ebrahim2
+		gameToolbar->GameStat();
 		if (y >= 0 && y < config.toolBarHeight)
 		{
 			clickedItem = gameToolbar->getItemClicked(x);
