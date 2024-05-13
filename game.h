@@ -41,7 +41,7 @@ public:
 	grid* getGrid() const;		//returns a pointer to the shapes grid
 
 	//creates an operation according to the toolbar item clicked
-	//operation* createRequiredOperation(toolbarItem clickedItem);
+	operation* createRequiredOperation(toolbarItem clickedItem);
 	Levels* getLevel();
 	void setLevel(Levels level);
 

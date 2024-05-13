@@ -92,21 +92,20 @@ struct
 enum toolbarItem //The items of the  toolbar (you should add more items)
 {
 
-	ITM_INCR,
-	ITM_ROTATE,
-	ITM_HINT,
-	ITM_RELOAD,
-	ITM_SAVE,
-	ITM_DEL,
-	ITM_DCR, 
-	ITM_EXIT,		
+	ITM_EXIT,
 	ITM_SIGN,
-	ITM_I,
+	ITM_ROTATE,
+	ITM_FLIP,
+	ITM_INCR,
+	ITM_DCR,
+	ITM_HNT,
 	ITM_HOUSE,
-	ITM_Rocket,
-	ITM_Blender,
-	ITM_Env,
-	ITM_Cap,
+	ITM_CAP,
+	ITM_ENV,
+	ITM_BLENDER,
+	ITM_ROCKET,
+	ITM_I,
+	
 	ITM_CNT		//no. of toolbar items ==> This should be the last line in this enum
 
 };

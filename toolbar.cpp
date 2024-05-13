@@ -1,9 +1,9 @@
 #include "toolbar.h"
 #include "game.h"
 //#include "grid.h"
-#include <string>
+//#include <string>
 using namespace std;
-#include "CMUgraphicsLib\CMUgraphics.h"
+//#include "CMUgraphicsLib\CMUgraphics.h"
 
 ////////////////////////////////////////////////////  class toolbar   //////////////////////////////////////////////
 toolbar::toolbar(game* pG)
@@ -22,23 +22,20 @@ toolbar::toolbar(game* pG)
 
 	//First prepare List of images for each toolbar item
 	toolbarItemImages[ITM_EXIT] = "images\\toolbarItems\\toolbar_Exit.jpg";
-	toolbarItemImages[ITM_DEL] = "images\\toolbarItems\\trash2.jpg";
-	toolbarItemImages[ITM_RELOAD] = "images\\toolbarItems\\reload.jpg";
-	toolbarItemImages[ITM_DCR] = "images\\toolbarItems\\Decrease.jpg";
-	toolbarItemImages[ITM_HINT] = "images\\toolbarItems\\hint.jpg";
-	toolbarItemImages[ITM_ROTATE] = "images\\toolbarItems\\rotate.jpg";
-	toolbarItemImages[ITM_INCR] = "images\\toolbarItems\\Increase.jpg";
 	toolbarItemImages[ITM_SIGN] = "images\\toolbarItems\\toolbar_Sign.jpg";
+	toolbarItemImages[ITM_ROTATE] = "images\\toolbarItems\\rotate.jpg";
+	toolbarItemImages[ITM_FLIP] = "images\\toolbarItems\\Flip.jpg";
+	toolbarItemImages[ITM_INCR] = "images\\toolbarItems\\Increase.jpg";
+	toolbarItemImages[ITM_DCR] = "images\\toolbarItems\\Decrease.jpg";
+	toolbarItemImages[ITM_HNT] = "images\\toolbarItems\\hint.jpg";
+	toolbarItemImages[ITM_HOUSE] = "images\\toolbarItems\\House.jpg";
+	toolbarItemImages[ITM_CAP] = "images\\toolbarItems\\Cap.jpg";
+	toolbarItemImages[ITM_ENV] = "images\\toolbarItems\\Envelop.jpg";
+	toolbarItemImages[ITM_BLENDER] = "images\\toolbarItems\\Blender.jpg";
+	toolbarItemImages[ITM_ROCKET] = "images\\toolbarItems\\Rocket.jpg";
 	toolbarItemImages[ITM_I] = "images\\toolbarItems\\I_Shape.jpg";
-	toolbarItemImages[ITM_HOUSE] = "images\\toolbarItems\\shape_pentagon.jpg";
-	toolbarItemImages[ITM_Rect] = "images\\toolbarItems\\Rect.jpg";
-	//by ebrahim
-
-	toolbarItemImages[ITM_Rocket] = "images\\toolbarItems\\Rocket.jpg";
-	toolbarItemImages[ITM_Blender] = "images\\toolbarItems\\Blender.jpg";
-	toolbarItemImages[ITM_Env] = "images\\toolbarItems\\Envelop.jpg";
-	toolbarItemImages[ITM_Cap] = "images\\toolbarItems\\Cap.jpg";
-
+	
+	
 	//TODO: Prepare image for each toolbar item and add it to the list
 
 	//Draw toolbar item one image at a time
