@@ -19,6 +19,8 @@ public:
 	virtual void rotate() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
+	virtual void resizeUp() override;
+	virtual void rotate() override;
 	point* getUpperLeft();
 	point* getLowerBottom();
 	//point* getRefPoint();
@@ -38,6 +40,8 @@ public:
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
 	//virtual void resize();
+	virtual void resizeUp() override;
+	virtual void rotate() override;
 	virtual void rotate() override;
 	point* getRefPoint();
 };
@@ -52,6 +56,8 @@ public:
 	virtual void calcCorners() override;
 	void SetColor(color clr);
 	virtual void move(int step, bool isVertical) override;
+	virtual void rotate() override;
+	virtual void resizeUp() override;
 	virtual void rotate() override;
 	virtual void flip() override;
 	//virtual void move() override;
@@ -71,6 +77,8 @@ public:
 	point* getUpperPoint();
 	point* getleftLower();
 	point* getRightLower();
+	virtual void resizeUp() override;
+	virtual void rotate() override;
 	//virtual void move() override;
 };
 
@@ -91,4 +99,6 @@ public:
 	point* getUpperPoint();
 	point* getleftLower();
 	point* getrightLowerPoint();
+	virtual void resizeUp() override;
+	virtual void rotate() override;
 };
