@@ -13,7 +13,7 @@ grid::grid(point r_uprleft, int wdth, int hght, game* pG)
 	rows = height / config.gridSpacing;
 	cols = width / config.gridSpacing;
 	shapeCount = 0;
-
+	RandShape = nullptr;
 	for (int i = 0; i < MaxShapeCount; i++)
 		shapeList[i] = nullptr;
 
@@ -41,15 +41,16 @@ void grid::draw() const
 //Draw ALL shapes
 	for (int i = 0; i < shapeCount; i++)
 		if (shapeList[i]) {
-			//shapeList[i]->calcCorners();
-			shapeList[i]->draw();	//draw each shape
+			shapeList[i]->draw();
 		}
 
 	//Draw the active shape
 	if (activeShape) {
-		//activeShape->calcCorners();
 		activeShape->draw();
 	}
+
+	if (RandShape)
+		RandShape->draw();
 }
 
 void grid::clearGridArea() const
@@ -83,3 +84,18 @@ void grid::setActiveShape(shape* actShape)
 
 shape* grid::getActiveShape() const { return activeShape; }
 
+void grid::deleteActiveShape()
+{
+	delete activeShape;
+	activeShape = nullptr;
+}
+
+void grid::setRandomShape(RandomShape* rndm)
+{
+	RandShape = rndm;
+}
+
+void grid::countSteps(shape* avtv)
+{
+	int steps = 0;
+}

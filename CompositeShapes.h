@@ -77,7 +77,7 @@ public:
 
 
 
-class Rocket : public shape
+class rocket : public shape
 {
 	point baseRectRef;
 	point headTriRef;
@@ -89,7 +89,7 @@ class Rocket : public shape
 	Right_triangle* triangle_pBottomLeft;
 
 public:
-	Rocket(game* r_pGame, point ref);
+	rocket(game* r_pGame, point ref);
 	virtual void draw();
 	virtual void rotate() override;
 	virtual void calcCorners() override;

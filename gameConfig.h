@@ -105,7 +105,7 @@ enum toolbarItem //The items of the  toolbar (you should add more items)
 	ITM_BLENDER,
 	ITM_ROCKET,
 	ITM_I,
-	
+	ITM_DEL,
 	ITM_CNT		//no. of toolbar items ==> This should be the last line in this enum
 
 };

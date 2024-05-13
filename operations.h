@@ -1,5 +1,6 @@
 #pragma once
 #include "gameConfig.h"
+
 class game;
 /////////////////////////////////// class operation  //////////////////
 //Base class of all operations supported by the application
@@ -7,20 +8,15 @@ class operation
 {
 protected:
 	game* pGame;
-	ARROWS clickedArrow;
 public:
 	operation(game* r_pGame);
 	~operation();
-	//Function Act:
-	//Implements the action that should be taken by this operation
-	//Should be overriden by derived classes
 	virtual void Act() = 0;
 	//virtual ARROWS getPressedArrow(ARROWS clckdArrow);
 };
-/////////////////////////////////// class operAddSign  //////////////////
-//Responsible for 
-//1- collectign data about a new Sign shape to add
-//2- Adding the new shape to the list of shapes (throgh the grid class)
+
+
+
 class operAddSign:public operation
 {
 public:
@@ -101,6 +97,13 @@ public:
 	operDeleteThisShape(game* r_pGame);
 	virtual void Act();
 
+};
+
+class BuildRandomShape : public operation
+{
+public:
+	BuildRandomShape(game* r_pGame);
+	virtual void Act() override;
 };
 
 

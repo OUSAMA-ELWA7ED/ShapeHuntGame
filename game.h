@@ -45,6 +45,7 @@ public:
 	Levels* getLevel();
 	void setLevel(Levels level);
 
+
 	void run();	//start the game
 
 };

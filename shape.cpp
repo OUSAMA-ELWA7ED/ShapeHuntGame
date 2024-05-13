@@ -27,6 +27,9 @@ void shape::move(int step, bool isVertical)
 	RefPoint.move(step, isVertical);
 }
 
+int shape::getRotationAngle() { return iRotationAngle; }
+
+
 //point* shape::getRefPoint() { return &RefPoint; }
 
 //void shape::move()

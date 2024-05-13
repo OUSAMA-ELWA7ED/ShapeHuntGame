@@ -68,7 +68,7 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 	case ITM_SIGN:
 		op = new operAddSign(this);
 		break;
-	/*case ITM_I:
+	case ITM_I:
 		op = new operAddI_Shape(this);
 		break;
 	case ITM_HOUSE:
@@ -77,7 +77,7 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 	case ITM_ROTATE:
 		op = new operMakeRotation(this);
 		break;
-	case ITM_HINT:
+	case ITM_HNT:
 		op = new operDeleteThisShape(this);
 		break;
 	case ITM_ROCKET:
@@ -91,7 +91,9 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 		break;
 	case ITM_CAP:
 		op = new operAddCap(this);
-		break;*/
+		break;
+	case ITM_DEL:
+		op = new operDeleteThisShape(this);
 
 	}
 
@@ -170,6 +172,10 @@ void game::run()
 	pWind->ChangeTitle("- - - - - - - - - - SHAPE HUNT (CIE 101 / CIE202 - project) - - - - - - - - - -");
 	toolbarItem clickedItem = ITM_CNT;
 	setLevel(LVL1);
+	operation* buildRandShape = new BuildRandomShape(this);
+	buildRandShape->Act();
+	
+	//operation* buildRandShape = new RandomShape(this)
 	do
 	{
 		pWind->WaitMouseClick(x, y);

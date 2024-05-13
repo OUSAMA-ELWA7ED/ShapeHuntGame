@@ -100,7 +100,7 @@ void cHouse::draw()
 }
 
 void cHouse::calcCorners() {}
-void Rocket::calcCorners() {}
+void rocket::calcCorners() {}
 void Blender::calcCorners() {}
 void Envelope::calcCorners() {}
 void Cap::calcCorners() {}
@@ -121,7 +121,7 @@ void cHouse::move(int step, bool isVerical) {}
 //void House::move(){}
 
 
-Rocket::Rocket(game* r_pGame, point ref) : shape(r_pGame, ref)
+rocket::rocket(game* r_pGame, point ref) : shape(r_pGame, ref)
 {
 	baseRectRef = ref;
 	headTriRef = { ref.x, ref.y - (config.Rocket_Shape.baseRectHeight) / 2 };
@@ -133,7 +133,7 @@ Rocket::Rocket(game* r_pGame, point ref) : shape(r_pGame, ref)
 	triangle_pBottomRight = new Right_triangle(pGame, RightLowerTriRef, config.Rocket_Shape.LowerRightTriWidth, config.Rocket_Shape.LowerRightTriHeight);
 	triangle_pBottomLeft = new Right_triangle(pGame, LeftLowerTriRef, -(config.Rocket_Shape.LowerRightTriWidth), config.Rocket_Shape.LowerRightTriHeight);
 }
-void Rocket::draw()  {
+void rocket::draw()  {
 	baseRect->SetColor(BLACK);
 	baseRect->draw();
 	headIsso->SetColor(BLACK);
@@ -145,7 +145,7 @@ void Rocket::draw()  {
 
 }
 
-void Rocket::rotate()
+void rocket::rotate()
 {
 	baseRect->rotate();
 	headIsso->getUpperPoint()->rotate(baseRectRef);
@@ -160,7 +160,7 @@ void Rocket::rotate()
 }
 
 
-void Rocket::move(int step, bool isVerical)
+void rocket::move(int step, bool isVerical)
 {
 }
 
@@ -310,8 +310,17 @@ void cHouse::flip()
 	//head->getleftLower()->flip()
 	base->getLowerBottom()->flip(*head->getUpperPoint());
 }
-void I_Shape::flip() {}
-void Envelope::flip() {}
-void Rocket::flip() {}
+
+
+void I_Shape::flip()
+{
+
+}
+void Envelope::flip() 
+{
+
+}
+
+void rocket::flip() {}
 void Blender::flip() {}
 void Cap::flip() {}

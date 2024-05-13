@@ -34,6 +34,7 @@ toolbar::toolbar(game* pG)
 	toolbarItemImages[ITM_BLENDER] = "images\\toolbarItems\\Blender.jpg";
 	toolbarItemImages[ITM_ROCKET] = "images\\toolbarItems\\Rocket.jpg";
 	toolbarItemImages[ITM_I] = "images\\toolbarItems\\I_Shape.jpg";
+	toolbarItemImages[ITM_DEL] = "images\\toolbarItems\\Delete.jpg";
 	
 	
 	//TODO: Prepare image for each toolbar item and add it to the list

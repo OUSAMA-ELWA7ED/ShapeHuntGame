@@ -1,6 +1,6 @@
 #pragma once
 #include "CompositeShapes.h"
-
+#include "RandomShape.h"
 class game;
 
 class grid
@@ -13,7 +13,7 @@ class grid
 
 	//ShapeList should hold the RANDOMLY generated shapes
 	shape* shapeList[MaxShapeCount];	//2D array of shape pointers
-
+	RandomShape* RandShape;
 	shape* activeShape;	//The shape that the user works on to match to the ranom shapes
 
 	int shapeCount;		//current number of shapes in the list
@@ -26,5 +26,8 @@ public:
 	bool addShape(shape* newShape);
 	void setActiveShape(shape* actShape);
 	shape* getActiveShape() const;
+	void deleteActiveShape();
+	void setRandomShape(RandomShape* rndm);
+	void countSteps(shape* actv);
 };
 

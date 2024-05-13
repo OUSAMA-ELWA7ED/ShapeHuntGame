@@ -1,6 +1,7 @@
 #include "operations.h"
 #include "game.h"
 #include "CompositeShapes.h"
+#include "RandomShape.h"
 
 
 
@@ -134,7 +135,7 @@ void operAddRocket::Act()
 	point Rocket_ShapeRef = { xGrid, yGrid };
 
 	//create a sign shape ==========================================> what's the purpose of the pointer to object shape
-	shape* pRocket = new Rocket(pGame, Rocket_ShapeRef);
+	shape* pRocket = new rocket(pGame, Rocket_ShapeRef);
 
 	//Add the shape to the grid
 	grid* pGrid = pGame->getGrid();
@@ -294,12 +295,21 @@ operDeleteThisShape::operDeleteThisShape(game* r_pGame) : operation(r_pGame)
 
 void operDeleteThisShape::Act()
 {
-	window* pWind = pGame->getWind();
+	//window* pWind = pGame->getWind();
 	grid* pGrid = pGame->getGrid();
-	pGrid->setActiveShape(nullptr);
+	pGrid->deleteActiveShape();
 }
 
+BuildRandomShape::BuildRandomShape(game* r_pGame) : operation(r_pGame)
+{}
 
+void BuildRandomShape::Act()
+{
+	grid* pGrid = pGame->getGrid();
+	RandomShape* rndmShape = new RandomShape(pGame, 1);
+	pGrid->setRandomShape(rndmShape);
+
+}
 
 
 
