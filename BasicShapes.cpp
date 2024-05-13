@@ -39,9 +39,23 @@ void Rect::draw()
 }
 
 
-void Rect::resize()
+void Rect::resizeUp() 
 {
+	height *= 2;
+	width *= 2;
 	
+	
+	calcCorners();
+
+}
+
+void Rect::resizeDown() 
+{
+	height /= 2;
+	width /= 2;
+	
+	
+	calcCorners();
 }
 
 void Rect::rotate()
@@ -99,7 +113,15 @@ void circle::move(int step, bool isVertical)
 {
 	RefPoint.move(step, isVertical);
 }
+void circle::resizeUp()
+{
+	rad *= 2;
+}
 
+void circle::resizeDown()
+{
+	rad /= 2;
+}
 
 
 
@@ -146,7 +168,23 @@ void Equi_triangle::rotate()
 	rightLowerPoint.rotate(RefPoint);
 
 }
+void Equi_triangle::resizeUp()
+{
+	base *= 2;
+	// Recalculate the vertices of the equilateral triangle
+	upperPoint.y = RefPoint.y - sqrt(3) * (base / 2);
+	leftLowerPoint.x = RefPoint.x - base / 2;
+	rightLowerPoint.x = RefPoint.x + base / 2;
+}
 
+void Equi_triangle::resizeDown()
+{
+	base /= 2;
+	// Recalculate the vertices of the equilateral triangle
+	upperPoint.y = RefPoint.y - sqrt(3) * (base / 2);
+	leftLowerPoint.x = RefPoint.x - base / 2;
+	rightLowerPoint.x = RefPoint.x + base / 2;
+}
 
 void Equi_triangle::move(int step, bool isVerical) {}
 // void Equi_triangle::move(){}
@@ -201,7 +239,52 @@ void Isso_triangle::move(int step, bool isVerical) {}
 point* Isso_triangle::getUpperPoint() { return &upperPoint; }
 point* Isso_triangle::getleftLower() { return &leftLowerPoint; }
 point* Isso_triangle::getRightLower() { return &rightLowerPoint; }
+void Isso_triangle::resizeUp() {
+	// Resize factor (can be adjusted if needed)
+	int resizeFactor = 2;
 
+	// Calculate new height based on resize factor
+	int newHeight = static_cast<int>(height * resizeFactor);
+
+	// Calculate the difference in height
+	int heightDiff = newHeight - height;
+
+	// Calculate the new base width based on proportions
+	int newBase = base * 2;
+
+	// Update upper point based on new height
+	upperPoint.y -= heightDiff;
+
+	// Update reference point based on new height (considering odd height difference)
+	RefPoint.y -= heightDiff / 2;
+	// Alternative for odd height difference:
+	// RefPoint.y -= (heightDiff + 1) / 2; // Add 1 to compensate for odd difference (optional)
+
+	// Update height and base
+	height = newHeight;
+	base = newBase;
+}
+
+
+
+void Isso_triangle::resizeDown() {
+	// Calculate new height and base
+	int newHeight = height / 2;
+	int newBase = base / 2;
+
+	// Calculate the difference in height
+	int heightDiff = height - newHeight;
+
+	// Move the upper point downwards
+	upperPoint.y += heightDiff;
+
+	// Update the reference point
+	RefPoint.y += heightDiff / 2;
+
+	// Update the height and base
+	height = newHeight;
+	base = newBase;
+}
 
 Right_triangle::Right_triangle(game* r_pGame, point ref, int Base, int Height) : shape(r_pGame, ref)
 {
@@ -239,7 +322,26 @@ point* Right_triangle::getleftLower() { return &leftLowerPoint; }
 point* Right_triangle::getrightLowerPoint() { return &rightLowerPoint; }
 
 void Right_triangle::calcCorners(){}
+void Right_triangle::resizeUp()
+{
+	base *= 2; // Double the base
+	height *= 2; // Double the height
 
+	// Recalculate the position of the lower right vertex
+	rightLowerPoint.x = RefPoint.x + base;
+	rightLowerPoint.y = RefPoint.y;
+}
+
+
+void Right_triangle::resizeDown()
+{
+	base /= 2; // Halve the base
+	height /= 2; // Halve the height
+
+	// Recalculate the position of the lower right vertex
+	rightLowerPoint.x = RefPoint.x + base;
+	rightLowerPoint.y = RefPoint.y;
+}
 
 
 
