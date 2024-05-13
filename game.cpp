@@ -63,41 +63,59 @@ void game::createGrid()
 operation* game::createRequiredOperation(toolbarItem clickedItem)
 {
 	operation* op = nullptr;
-	switch (clickedItem)
-	{
-	case ITM_SIGN:
-		op = new operAddSign(this);
-		break;
-	case ITM_I:
-		op = new operAddI_Shape(this);
-		break;
-	case ITM_HOUSE:
-		op = new operAddHouse(this);
-		break;
-	case ITM_ROTATE:
-		op = new operMakeRotation(this);
-		break;
-	case ITM_HNT:
-		op = new operDeleteThisShape(this);
-		break;
-	case ITM_ROCKET:
-		op = new operAddRocket(this);
-		break;
-	case ITM_BLENDER:
-		op = new operAddBlender(this);
-		break;
-	case ITM_ENV:
-		op = new operAddEnv(this);
-		break;
-	case ITM_CAP:
-		op = new operAddCap(this);
-		break;
-	case ITM_DEL:
-		op = new operDeleteThisShape(this);
-
+case ITM_SIGN:
+	op = new operAddSign(this);
+	game::printMessage("You Clicked on 'Add Sign Shape'");
+	break;
+case ITM_I:
+	op = new operAddI_Shape(this);
+	game::printMessage("You Clicked on 'Add I Shape'");
+	break;
+case ITM_HOUSE:
+	op = new operAddHouse(this);
+	game::printMessage("You Clicked on 'Add House Shape'");
+	break;
+//by ebrahim
+case ITM_Rocket:
+	op = new operAddRocket(this);
+	game::printMessage("You Clicked on 'Add Rocket Shape'");
+	break;
+case ITM_Blender:
+	op = new operAddBlender(this);
+	game::printMessage("You Clicked on 'Add Blender Shape'");
+	break;
+case ITM_Env:
+	op = new operAddEnv(this);
+	game::printMessage("You Clicked on 'Add Env Shape'");
+	break;
+case ITM_Cap:
+	op=new operAddCap(this);
+	game::printMessage("You Clicked on 'Add Cap Shape'");
+	break;
+case ITM_ROTATE:
+	op = new operMakeRotation(this);
+	game::printMessage("You Clicked on 'Rotate' Operation");
+	break;
+case ITM_DCR:
+	op = new operResizeDown(this);
+	game::printMessage("You Clicked on 'Resize Down' Operation");
+	break;
+case ITM_INCR:
+	op = new operResizeUp(this);
+	game::printMessage("You Clicked on 'Resize Up' Operation");
+	break;
+case ITM_EXIT:
+	op = new operExit(this);
+	break;
+case ITM_HNT:
+	op = new operDeleteThisShape(this);
+	game::printMessage("You Clicked on 'Hint' Operation");
+	break;
+case ITM_DEL:
+	op = new operDeleteThisShape(this);
+	game::printMessage("You Clicked on 'Delete' Operation");
+	break;
 	}
-
-
 	return op;
 }
 
