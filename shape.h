@@ -123,6 +123,8 @@ public:
 	//virtual void resize() = 0;
 	int getRotationAngle();
 	int getNumberOfResizeCalls();
+	virtual void resizeUp() = 0;     //Resize the shape up
+	virtual void resizeDown() = 0;	//Resize the shape down 
 	//virtual void save(ofstream &OutFile) = 0;	//Save the shape parameters to the file
 	//virtual void load(ifstream &Infile) = 0;	//Load the shape parameters to the file
 
