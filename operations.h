@@ -111,3 +111,35 @@ public:
 //	operAddRect(game* r_pGame);
 //	virtual void Act();
 //};
+// file operation.h
+class operSelect_level:public operation
+{
+public:
+operSelect_level(game* r_pGame);
+virtual void Act();
+};
+
+//file operation.cpp
+operSelect_level::operSelect_level(game* r_pGame):operation(r_pGame)
+{}
+void operSelect_level::Act()
+{
+
+Levels* lvl=pGame->getLevel();
+	switch(lvl)
+		{
+			case LVL1 :
+			break;
+			case LVL2 :
+			break;
+			case LVL3 :
+			break;
+			case LVL4 :
+			break;
+			case LVL5 :
+			break;
+			default:
+			break;
+			
+		}
+}
