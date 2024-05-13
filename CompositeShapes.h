@@ -34,7 +34,8 @@ public:
 	virtual void rotate() override;
 	virtual void move(int step, bool isVerical) override;
 	virtual void flip() override;
-	
+	virtual void resizeUp() override;
+        virtual void resizeDown() override;
 	//void move();
 	//virtual void move() override;
 
@@ -56,6 +57,8 @@ public:
 	virtual void move(int step, bool isVerical) override;
 	virtual void flip() override;
 	//virtual void move() override;
+        virtual void resizeUp() override;
+        virtual void resizeDown() override;
 };
 
 class cHouse : public shape
@@ -73,6 +76,8 @@ public:
 	virtual void rotate() override;
 	virtual void flip() override;
 	//virtual void move() override;
+        virtual void resizeUp() override;
+        virtual void resizeDown() override;
 };
 
 
@@ -95,6 +100,8 @@ public:
 	virtual void calcCorners() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
+        virtual void resizeUp() override;
+        virtual void resizeDown() override;
 };
 
 
@@ -118,6 +125,8 @@ public:
 	virtual void calcCorners() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
+        virtual void resizeUp() override;
+        virtual void resizeDown() override;
 };
 
 
@@ -139,6 +148,8 @@ public:
 	virtual void calcCorners() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
+        virtual void resizeUp() override;
+        virtual void resizeDown() override;
 };
 
 
@@ -158,6 +169,8 @@ public:
 	virtual void calcCorners() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
+        virtual void resizeUp() override;
+        virtual void resizeDown() override;
 };
 
 
