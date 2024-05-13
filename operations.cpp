@@ -310,6 +310,65 @@ void BuildRandomShape::Act()
 	pGrid->setRandomShape(rndmShape);
 
 }
+operResizeUp::operResizeUp(game* r_pGame) : operation(r_pGame)
+{
+}
+
+void operResizeUp::Act()
+{
+	window* presizeDown = pGame->getWind();
+	grid* pGrid = pGame->getGrid();
+	pGrid->getActiveShape()->resizeUp();
+}
+
+/////////////////////////////////// class operResizeDown  //////////////////
+
+operResizeDown::operResizeDown(game* r_pGame) : operation(r_pGame)
+{
+}
+
+void operResizeDown::Act()
+{
+	window* presizeDown = pGame->getWind();
+	grid* pGrid = pGame->getGrid();
+	
+	pGrid->getActiveShape()->resizeDown();
+	
+}
+operExit::operExit(game* r_pGame) : operation(r_pGame)
+{
+}
+	
+
+void operExit::Act()
+		{
+	int width = 320; // Adjust according to your needs
+	int height = 200;
+	int x = 400; // Adjust the position of the window
+	int y = 200;
+	window* win = new window(width, height, x,y);
+	
+    win->DrawImage("images\\toolbarItems\\YesButton.jpg", x +10 , y + 50, 100, 50);
+	win->DrawImage("images\\toolbarItems\\NoButton.jpg", x + 50, y + 50, 100, 50);
+	while (true) {
+		int clickedX, clickedY;
+		win->WaitMouseClick(clickedX, clickedY);
+
+		// Check if the click is within the "Yes" button
+		if (clickedX >= x + 50 && clickedX <= x + 150 &&
+			clickedY >= y + 50 && clickedY <= y + 100) {
+			// Save and exit
+			//operSave();
+			exit(0);
+		}
+		// Check if the click is within the "No" button
+		else if (clickedX >= x + 150 && clickedX <= x + 250 &&
+			clickedY >= y + 50 && clickedY <= y + 100) {
+			// Just exit
+			exit(0);
+		}
+	}
+}
 
 
 
