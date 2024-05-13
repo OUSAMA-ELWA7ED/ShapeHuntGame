@@ -47,6 +47,19 @@ toolbar::toolbar(game* pG)
 	pWind->SetPen(DARKBLUE, 3);
 	pWind->DrawLine(0, height, width, height);
 }
+//new by ebrahim2
+ void toolbar::GameStat(){
+
+	window* pWind = pGame->getWind();
+	
+	//new by ebrahim
+		//Draw a game status
+	pWind->SetPen(BLACK, 1);
+	pWind->SetFont(20, BOLD | ITALICIZED, BY_NAME, "Arial");
+	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight, "Lives:" + to_string(live));
+	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight - config.seprator, "Score:" + to_string(score));
+	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight - 2 * (config.seprator), "Level:" + to_string(level));
+}
 
 
 
