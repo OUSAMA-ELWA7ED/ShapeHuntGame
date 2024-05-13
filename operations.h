@@ -113,3 +113,13 @@ public:
 //	operAddRect(game* r_pGame);
 //	virtual void Act();
 //};
+
+
+// file operation.h
+class operSelect_level:public operation
+{
+public:
+operSelect_level(game* r_pGame);
+virtual void Act();
+};
+

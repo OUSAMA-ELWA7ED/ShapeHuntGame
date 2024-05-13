@@ -312,4 +312,28 @@ void BuildRandomShape::Act()
 }
 
 
+//file operation.cpp
+operSelect_level::operSelect_level(game* r_pGame):operation(r_pGame)
+{}
+void operSelect_level::Act()
+{
+
+Levels* lvl=pGame->getLevel();
+	switch(lvl)
+		{
+			case LVL1 :pGame->setLevel(LVL1);
+			break;
+			case LVL2 :pGame->setLevel(LVL2);
+			break;
+			case LVL3 :pGame->setLevel(LVL3);
+			break;
+			case LVL4 :pGame->setLevel(LVL4);
+			break;
+			case LVL5 :pGame->setLevel(LVL5);
+			break;
+			default:pGame->setLevel(LVL1);
+			break;
+			
+		}
+}
 
