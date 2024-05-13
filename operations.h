@@ -1,6 +1,5 @@
 #pragma once
-#include "game.h"
-
+#include "gameConfig.h"
 class game;
 /////////////////////////////////// class operation  //////////////////
 //Base class of all operations supported by the application

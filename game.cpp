@@ -68,7 +68,7 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 	case ITM_SIGN:
 		op = new operAddSign(this);
 		break;
-	case ITM_I:
+	/*case ITM_I:
 		op = new operAddI_Shape(this);
 		break;
 	case ITM_HOUSE:
@@ -80,18 +80,18 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 	case ITM_HINT:
 		op = new operDeleteThisShape(this);
 		break;
-	case ITM_Rocket:
+	case ITM_ROCKET:
 		op = new operAddRocket(this);
 		break;
-	case ITM_Blender:
+	case ITM_BLENDER:
 		op = new operAddBlender(this);
 		break;
-	case ITM_Env:
+	case ITM_ENV:
 		op = new operAddEnv(this);
 		break;
-	case ITM_Cap:
+	case ITM_CAP:
 		op = new operAddCap(this);
-		break;
+		break;*/
 
 	}
 
@@ -173,6 +173,8 @@ void game::run()
 	do
 	{
 		pWind->WaitMouseClick(x, y);
+		//new by ebrahim2
+		gameToolbar->GameStat();
 		if (y >= 0 && y < config.toolBarHeight)
 		{
 			clickedItem = gameToolbar->getItemClicked(x);

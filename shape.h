@@ -110,7 +110,6 @@ public:
 
 	virtual void flip() = 0;
 	virtual void rotate() = 0;	//Rotate the shape
-	//virtual void resize() = 0;	//Resize the shape
 	virtual void move(int step, bool isVertical) = 0;
 	virtual void calcCorners() = 0; // function to make the calculations
 	//virtual void save(ofstream &OutFile) = 0;	//Save the shape parameters to the file
