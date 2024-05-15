@@ -113,7 +113,33 @@ public:
 //	operAddRect(game* r_pGame);
 //	virtual void Act();
 //};
+class operResizeDown : public operation
+{
+public:
+	operResizeDown(game* r_pGame);
+	virtual void Act();
+};
 
+class operResizeUp : public operation
+{
+public:
+	operResizeUp(game* r_pGame);
+	virtual void Act();
+};
+
+
+//class operAddRect : public operation
+//{
+//public:
+//	operAddRect(game* r_pGame);
+//	virtual void Act();
+//};
+class operExit : public operation
+{
+public:
+	operExit(game* r_game);
+	virtual void Act();
+};
 
 // file operation.h
 class operSelect_level:public operation
