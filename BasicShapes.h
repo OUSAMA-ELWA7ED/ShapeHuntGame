@@ -14,7 +14,8 @@ public:
 	Rect(game* r_pGame, point ref, int r_hght, int r_wdth);
 	virtual void calcCorners() override;
 	virtual void draw();
-	virtual void resize();
+	virtual void resizeDown() override;
+	virtual void resizeUp() override;
 	void SetColor(color clr);
 	virtual void rotate() override;
 	virtual void move(int step, bool isVertical) override;
@@ -40,6 +41,9 @@ public:
 	//virtual void resize();
 	virtual void rotate() override;
 	point* getRefPoint();
+	virtual void resizeDown() override;
+	virtual void resizeUp() override;
+	
 };
 
 class Equi_triangle : public shape
@@ -51,6 +55,8 @@ public:
 	virtual void draw();
 	virtual void calcCorners() override;
 	void SetColor(color clr);
+	virtual void resizeUp() override;
+	virtual void resizeDown() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void rotate() override;
 	virtual void flip() override;
@@ -67,6 +73,8 @@ public:
 	virtual void move(int step, bool isVertical) override;
 	virtual void rotate() override;
 	virtual void flip() override;
+	virtual void resizeUp() override;
+	virtual void resizeDown() override;
 	void SetColor(color clr);
 	point* getUpperPoint();
 	point* getleftLower();
@@ -88,6 +96,8 @@ public:
 	virtual void calcCorners() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
+	virtual void resizeUp() override;
+	virtual void resizeDown() override;
 	point* getUpperPoint();
 	point* getleftLower();
 	point* getrightLowerPoint();
