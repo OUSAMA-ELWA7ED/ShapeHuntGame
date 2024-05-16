@@ -14,7 +14,8 @@ public:
 	Rect(game* r_pGame, point ref, int r_hght, int r_wdth);
 	virtual void calcCorners() override;
 	virtual void draw();
-	virtual void resize();
+	virtual void resizeDown() override;
+	virtual void resizeUp() override;
 	void SetColor(color clr);
 	virtual void rotate() override;
 	virtual void move(int step, bool isVertical) override;
@@ -37,7 +38,8 @@ public:
 	void SetColor(color clr);
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
-	//virtual void resize();
+	virtual void resizeDown() override;
+	virtual void resizeUp() override;
 	virtual void rotate() override;
 	point* getRefPoint();
 };
@@ -54,6 +56,9 @@ public:
 	virtual void move(int step, bool isVertical) override;
 	virtual void rotate() override;
 	virtual void flip() override;
+	virtual void resizeDown() override;
+	virtual void resizeUp() override;
+
 	//virtual void move() override;
 };
 class Isso_triangle : public shape
@@ -71,6 +76,9 @@ public:
 	point* getUpperPoint();
 	point* getleftLower();
 	point* getRightLower();
+	virtual void resizeDown() override;
+	virtual void resizeUp() override;
+
 	//virtual void move() override;
 };
 
@@ -91,4 +99,7 @@ public:
 	point* getUpperPoint();
 	point* getleftLower();
 	point* getrightLowerPoint();
+	virtual void resizeDown() override;
+	virtual void resizeUp() override;
+
 };
