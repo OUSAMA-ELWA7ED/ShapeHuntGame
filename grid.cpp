@@ -2,7 +2,7 @@
 #include "game.h"
 #include "gameConfig.h"
 #include "CompositeShapes.h"
-
+#include "RandomShape.h"
 
 grid::grid(point r_uprleft, int wdth, int hght, game* pG)
 {
@@ -48,7 +48,7 @@ void grid::draw() const
 	if (activeShape) {
 		activeShape->draw();
 	}
-		RandShape->draw();
+		//RandShape->draw();
 }
 
 void grid::clearGridArea() const

@@ -1,6 +1,6 @@
-
 #include "game.h"
 #include "gameConfig.h"
+#include "RandomShape.h"
 
 
 
@@ -16,7 +16,7 @@ game::game()
 	//Create and draw the grid
 	createGrid();
 	shapesGrid->draw();	//draw the grid and all shapes it contains.
-
+	//setLevel(LVL1);
 	//Create and clear the status bar
 	clearStatusBar();
 
@@ -66,36 +66,60 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 	operation* op = nullptr;
 	switch (clickedItem)
 	{
+		{
 	case ITM_SIGN:
 		op = new operAddSign(this);
+		game::printMessage("You Clicked on 'Add Sign Shape'");
 		break;
 	case ITM_I:
 		op = new operAddI_Shape(this);
+		game::printMessage("You Clicked on 'Add I Shape'");
 		break;
 	case ITM_HOUSE:
 		op = new operAddHouse(this);
+		game::printMessage("You Clicked on 'Add House Shape'");
 		break;
-	case ITM_ROTATE:
-		op = new operMakeRotation(this);
-		break;
-	case ITM_HNT:
-		op = new operDeleteThisShape(this);
+	//by ebrahim
+	case ITM_BLENDER:
+		op = new operAddRocket(this);
+		game::printMessage("You Clicked on 'Add Rocket Shape'");
 		break;
 	case ITM_ROCKET:
-		op = new operAddRocket(this);
-		break;
-	case ITM_BLENDER:
 		op = new operAddBlender(this);
+		game::printMessage("You Clicked on 'Add Blender Shape'");
 		break;
 	case ITM_ENV:
 		op = new operAddEnv(this);
+		game::printMessage("You Clicked on 'Add Env Shape'");
 		break;
 	case ITM_CAP:
-		op = new operAddCap(this);
+		op=new operAddCap(this);
+		game::printMessage("You Clicked on 'Add Cap Shape'");
+		break;
+	case ITM_ROTATE:
+		op = new operMakeRotation(this);
+		game::printMessage("You Clicked on 'Rotate' Operation");
+		break;
+	case ITM_DCR:
+		op = new operResizeDown(this);
+		game::printMessage("You Clicked on 'Resize Down' Operation");
+		break;
+	case ITM_INCR:
+		op = new operResizeUp(this);
+		game::printMessage("You Clicked on 'Resize Up' Operation");
+		break;
+	case ITM_EXIT:
+		op = new operExit(this);
+		game::printMessage("Would you Like to Save?    YES / NO ");
+		break;
+	}
+	case ITM_HNT:
+		op = new operDeleteThisShape(this);
+	game::printMessage("You Clicked on 'Hint' Operation");
 		break;
 	case ITM_DEL:
 		op = new operDeleteThisShape(this);
-
+	game::printMessage("You Clicked on 'Delete' Operation");
 	}
 
 
@@ -174,8 +198,8 @@ void game::run()
 	toolbarItem clickedItem = ITM_CNT;
 	setLevel(LVL1);
 	gameToolbar->GameStat();
-	RandomShape randm(this);
-	randm.draw();
+	RandomShape* randm= new RandomShape(this);
+	randm->draw();
 	
 	
 	//operation* buildRandShape = new RandomShape(this)

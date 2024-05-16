@@ -5,18 +5,19 @@
 RandomShape::RandomShape(game* r_pGame)
 {
 	pGame = r_pGame;
-	NumberOfShapes = getNumberOfShapes(ShowLevel());
+	NumberOfShapes = 5;
 	PickedShapes = new ShapeType[NumberOfShapes];
 
 	for (int i = 0; i < NumberOfShapes; i++)
 	{
 		PickedShapes[i] = getRandomShapeTypes();
 	}
+	
 }
 
 void RandomShape::draw()
 {
-	for (int i = 0; i < NumberOfShapes; i++) 
+	for (int i = 0; i < 5; i++) 
 	{
 		switch (PickedShapes[1])
 		{
@@ -94,11 +95,14 @@ ShapeType RandomShape::getRandomShapeTypes()
 
 }
 
-int RandomShape::getNumberOfShapes(Levels* curnLvl)
-{
-	int n = int(curnLvl);
-	NumberOfShapes = n * 2 - 1;
-}
+//void RandomShape::setNumberOfShapes(Levels* curnLvl)
+//{
+//	int n = int(curnLvl);
+//	NumberOfShapes = 5;
+//}
+
+int* RandomShape::getNumberOfShapes() { return &NumberOfShapes; }
+
 
 point RandomShape::getRandomPoint()
 {
@@ -132,5 +136,6 @@ void RandomShape::StoreShapes(shape* ns)
 
 Levels* RandomShape::ShowLevel()
 {
-	Levels* currentLvl = pGame->getLevel();
+	Levels* currentLvl = new Levels(LVL1);
+	return currentLvl;
 }

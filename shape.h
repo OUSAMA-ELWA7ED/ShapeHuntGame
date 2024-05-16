@@ -121,6 +121,8 @@ public:
 	//virtual point* getBoundaryBox() = 0;
 	virtual void flip() = 0;
 	//virtual void resize() = 0;
+	virtual void resizeUp() = 0;     //Resize the shape up
+	virtual void resizeDown() = 0;	//Resize the shape down
 	int getRotationAngle();
 	int getNumberOfResizeCalls();
 	//virtual void save(ofstream &OutFile) = 0;	//Save the shape parameters to the file

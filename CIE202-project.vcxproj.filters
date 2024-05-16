@@ -111,7 +111,6 @@
     <ClCompile Include="toolbar.cpp">
       <Filter>toolbar</Filter>
     </ClCompile>
-    <ClCompile Include="grid.cpp" />
     <ClCompile Include="BasicShapes.cpp">
       <Filter>Shapes</Filter>
     </ClCompile>
@@ -124,6 +123,8 @@
     <ClCompile Include="operations.cpp">
       <Filter>Operations</Filter>
     </ClCompile>
+    <ClCompile Include="RandomShape.cpp" />
+    <ClCompile Include="grid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -190,7 +191,6 @@
     <ClInclude Include="toolbar.h">
       <Filter>toolbar</Filter>
     </ClInclude>
-    <ClInclude Include="grid.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="BasicShapes.h">
       <Filter>Shapes</Filter>
@@ -204,6 +204,8 @@
     <ClInclude Include="operations.h">
       <Filter>Operations</Filter>
     </ClInclude>
+    <ClInclude Include="RandomShape.h" />
+    <ClInclude Include="grid.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GraphicsLib">

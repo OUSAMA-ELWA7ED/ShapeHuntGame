@@ -3,9 +3,10 @@
 #include "game.h"
 
 //class game
+enum Levels;
 class RandomShape
 {
-		int NumberOfShapes;
+		int NumberOfShapes = 5;
 		ShapeType* PickedShapes;
 		ShapeOperations soImplementOperation;
 		point* BondaryPoints;
@@ -18,7 +19,7 @@ class RandomShape
 		RandomShape(game* r_pGame);
 		void draw();
 		ShapeType getRandomShapeTypes();
-		int getNumberOfShapes(Levels* curnLvl);
+		int* getNumberOfShapes();
 		point getRandomPoint();
 		void MakeRandomOperation(shape* sh);
 		//point* getBoundaryPoints(shape* sh);

@@ -27,6 +27,8 @@ class Sign : public shape
 	Rect* top;
 	point topRef;	
 	point baseRef;
+	int refpointx;
+	int refpointy;
 public:
 	Sign(game* r_pGame, point ref);
 	virtual void draw();
@@ -34,6 +36,9 @@ public:
 	virtual void rotate() override;
 	virtual void move(int step, bool isVerical) override;
 	virtual void flip() override;
+	virtual void resizeUp() override;
+	virtual void resizeDown() override;
+
 	
 	//void move();
 	//virtual void move() override;
@@ -48,6 +53,8 @@ class I_Shape : public shape // Ref at mid rect
 	Rect* base;
 	Rect* top;
 	Rect* rect_pMid;
+	int refpointx;
+	int refpointy;
 public:
 	I_Shape(game* r_pGame, point ref);
 	virtual void draw();
@@ -56,6 +63,9 @@ public:
 	virtual void move(int step, bool isVerical) override;
 	virtual void flip() override;
 	//virtual void move() override;
+	virtual void resizeUp() override;
+	virtual void resizeDown() override;
+
 };
 
 class cHouse : public shape
@@ -64,6 +74,8 @@ class cHouse : public shape
 	Isso_triangle* head;
 	point baseRef;
 	point headRef;
+	int refpointx;
+	int refpointy;
 	//circle* test;
 public:
 	cHouse(game* r_pGame, point ref);
@@ -72,6 +84,9 @@ public:
 	virtual void move(int step, bool isVerical) override;
 	virtual void rotate() override;
 	virtual void flip() override;
+	virtual void resizeUp() override;
+	virtual void resizeDown()override;
+
 	//virtual void move() override;
 };
 
@@ -87,6 +102,8 @@ class rocket : public shape
 	Isso_triangle* headIsso;
 	Right_triangle* triangle_pBottomRight;
 	Right_triangle* triangle_pBottomLeft;
+	int refpointx;
+	int refpointy;
 
 public:
 	rocket(game* r_pGame, point ref);
@@ -95,6 +112,9 @@ public:
 	virtual void calcCorners() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
+	virtual void resizeUp()override;
+	virtual void resizeDown()override;
+
 };
 
 
@@ -111,6 +131,8 @@ class Blender : public shape {
 	Rect* LowerRect;
 	Right_triangle* triangle_pBottomRight;
 	Right_triangle* triangle_pBottomLeft;
+	int refpointx;
+	int refpointy;
 public:
 	Blender(game* r_pGame, point ref);
 	virtual void draw();
@@ -118,6 +140,9 @@ public:
 	virtual void calcCorners() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
+	virtual void resizeUp()override;
+	virtual void resizeDown()override;
+
 };
 
 
@@ -132,6 +157,8 @@ class Envelope : public shape
 	Rect* TopRect;
 	Right_triangle* TriRight;
 	Right_triangle* TriLeft;
+	int refpointx;
+	int refpointy;
 public:
 	Envelope(game* r_pGame, point ref);
 	virtual void draw();
@@ -139,6 +166,9 @@ public:
 	virtual void calcCorners() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
+	virtual void resizeUp()override;
+	virtual void resizeDown()override;
+
 };
 
 
@@ -151,6 +181,8 @@ class Cap : public shape
 	Rect* baseRect;
 	Isso_triangle* midTri;
 	circle* topCircle;
+	int refpointx;
+	int refpointy;
 public:
 	Cap(game* r_pGame, point ref);
 	virtual void draw();
@@ -158,6 +190,9 @@ public:
 	virtual void calcCorners() override;
 	virtual void move(int step, bool isVertical) override;
 	virtual void flip() override;
+	virtual void resizeUp() override;
+	virtual void resizeDown()override;
+
 };
 
 

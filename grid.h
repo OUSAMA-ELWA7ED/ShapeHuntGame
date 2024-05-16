@@ -1,8 +1,8 @@
 #pragma once
 #include "CompositeShapes.h"
-#include "RandomShape.h"
+//#include "RandomShape.h"
 class game;
-
+class RandomShape;
 class grid
 {
 	enum { MaxShapeCount = 1000  };	//assuming max shape count = 1000
