@@ -1,8 +1,11 @@
 #pragma once
+#ifndef GAME_H
+#define GAME_H
 #include "CMUgraphicsLib\CMUgraphics.h"
 #include "toolbar.h"
 #include "operations.h"
 #include "grid.h"
+
 
 enum Levels
 {
@@ -50,3 +53,4 @@ public:
 
 };
 
+#endif

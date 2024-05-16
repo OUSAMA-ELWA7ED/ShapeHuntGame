@@ -1,3 +1,4 @@
+
 #include "game.h"
 #include "gameConfig.h"
 
@@ -172,15 +173,17 @@ void game::run()
 	pWind->ChangeTitle("- - - - - - - - - - SHAPE HUNT (CIE 101 / CIE202 - project) - - - - - - - - - -");
 	toolbarItem clickedItem = ITM_CNT;
 	setLevel(LVL1);
-	operation* buildRandShape = new BuildRandomShape(this);
-	buildRandShape->Act();
+	gameToolbar->GameStat();
+	RandomShape randm(this);
+	randm.draw();
+	
 	
 	//operation* buildRandShape = new RandomShape(this)
 	do
 	{
 		pWind->WaitMouseClick(x, y);
 		//new by ebrahim2
-		gameToolbar->GameStat();
+		
 		if (y >= 0 && y < config.toolBarHeight)
 		{
 			clickedItem = gameToolbar->getItemClicked(x);
@@ -255,3 +258,5 @@ void game::run()
 
 	} while (clickedItem != ITM_EXIT);
 }
+
+

@@ -48,8 +48,6 @@ void grid::draw() const
 	if (activeShape) {
 		activeShape->draw();
 	}
-
-	if (RandShape)
 		RandShape->draw();
 }
 
@@ -68,8 +66,9 @@ bool grid::addShape(shape* newShape)
 	// 1- Check that the shape can be drawn witout being clipped by grid boundaries
 	// 2- check shape count doesn't exceed maximum count
 	// return false if any of the checks fail
-	for (int i = 0; i < shapeCount; i++)
-		shapeList[i] = getActiveShape();
+	/*for (int i = 0; i < shapeCount; i++)
+		shapeList[i] = newShape;*/
+
 	
 	//Here we assume that the above checks are passed
 	shapeList[shapeCount++] = newShape;
@@ -86,7 +85,7 @@ shape* grid::getActiveShape() const { return activeShape; }
 
 void grid::deleteActiveShape()
 {
-	delete activeShape;
+	//delete activeShape;
 	activeShape = nullptr;
 }
 

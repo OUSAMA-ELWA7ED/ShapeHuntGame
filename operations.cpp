@@ -306,7 +306,7 @@ BuildRandomShape::BuildRandomShape(game* r_pGame) : operation(r_pGame)
 void BuildRandomShape::Act()
 {
 	grid* pGrid = pGame->getGrid();
-	RandomShape* rndmShape = new RandomShape(pGame, 1);
+	RandomShape* rndmShape = new RandomShape(pGame);
 	pGrid->setRandomShape(rndmShape);
 
 }

@@ -1,13 +1,14 @@
 #include "RandomShape.h"
+//#include "gameConfig.h"
 #include <cstdlib>
 #include <time.h>
-#include "grid.h"
-RandomShape::RandomShape(game* r_pGame, int N)
+RandomShape::RandomShape(game* r_pGame)
 {
 	pGame = r_pGame;
-	n = N;
-	PickedShapes = new ShapeType[n];
-	for (int i = 0; i < n; i++)
+	NumberOfShapes = getNumberOfShapes(ShowLevel());
+	PickedShapes = new ShapeType[NumberOfShapes];
+
+	for (int i = 0; i < NumberOfShapes; i++)
 	{
 		PickedShapes[i] = getRandomShapeTypes();
 	}
@@ -15,9 +16,9 @@ RandomShape::RandomShape(game* r_pGame, int N)
 
 void RandomShape::draw()
 {
-	for (int i = 0; i < getNumberOfShapes(); i++) 
+	for (int i = 0; i < NumberOfShapes; i++) 
 	{
-		switch (PickedShapes[i])
+		switch (PickedShapes[1])
 		{
 		case SIGN:
 		{
@@ -93,10 +94,10 @@ ShapeType RandomShape::getRandomShapeTypes()
 
 }
 
-int RandomShape::getNumberOfShapes()
+int RandomShape::getNumberOfShapes(Levels* curnLvl)
 {
-	n = 2*n - 1;
-	return n;
+	int n = int(curnLvl);
+	NumberOfShapes = n * 2 - 1;
 }
 
 point RandomShape::getRandomPoint()
@@ -125,6 +126,11 @@ void RandomShape::MakeRandomOperation(shape* sh)
 
 void RandomShape::StoreShapes(shape* ns)
 {
-	grid* pGrid  = pGame->getGrid();
+	grid* pGrid = pGame->getGrid();
 	pGrid->addShape(ns);
+}
+
+Levels* RandomShape::ShowLevel()
+{
+	Levels* currentLvl = pGame->getLevel();
 }
