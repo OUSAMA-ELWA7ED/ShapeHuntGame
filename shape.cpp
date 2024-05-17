@@ -15,6 +15,7 @@ void shape::setRefPoint(point p)
 	RefPoint = p;
 }
 
+point shape::getReferencePoint() { return RefPoint; }
 
 shape::~shape()
 {
@@ -28,7 +29,7 @@ void shape::move(int step, bool isVertical)
 }
 
 int shape::getRotationAngle() { return iRotationAngle; }
-
+int shape::getNumberOfResizeCalls() { return iResizeCalls; }
 
 //point* shape::getRefPoint() { return &RefPoint; }
 

@@ -71,6 +71,13 @@ struct point
 	}
 
 
+	bool operator ==(point other) {
+		if (other.x == x && other.y == y)
+			return true;
+		return false;
+	}
+
+
 };
 
 enum ShapeType
@@ -120,11 +127,12 @@ public:
 	//virtual bool isExceeded() = 0;
 	//virtual point* getBoundaryBox() = 0;
 	virtual void flip() = 0;
+	virtual point getReferencePoint();
 	//virtual void resize() = 0;
 	virtual void resizeUp() = 0;     //Resize the shape up
 	virtual void resizeDown() = 0;	//Resize the shape down
-	int getRotationAngle();
-	int getNumberOfResizeCalls();
+	virtual int getRotationAngle();
+	virtual int getNumberOfResizeCalls();
 	//virtual void save(ofstream &OutFile) = 0;	//Save the shape parameters to the file
 	//virtual void load(ifstream &Infile) = 0;	//Load the shape parameters to the file
 
