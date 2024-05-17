@@ -1,6 +1,5 @@
 #include "game.h"
 #include "gameConfig.h"
-#include "RandomShape.h"
 
 
 
@@ -9,16 +8,15 @@ game::game()
 
 	//Create the main window
 	createWind(config.windWidth, config.windHeight, config.wx, config.wy);
-
 	//Create and draw the toolbar
 	createToolBar();
-
 	//Create and draw the grid
 	createGrid();
-	shapesGrid->draw();	//draw the grid and all shapes it contains.
-	//setLevel(LVL1);
-	//Create and clear the status bar
+	shapesGrid->draw();
+	shapesGrid->createRandomShape();
+	//draw the grid and all shapes it contains.
 	clearStatusBar();
+	
 
 }
 
@@ -26,6 +24,7 @@ game::~game()
 {
 	delete pWind;
 	delete shapesGrid;
+	
 }
 
 
@@ -51,6 +50,7 @@ void game::createToolBar()
 {
 	gameToolbar = new toolbar(this);
 }
+
 
 void game::createGrid()
 {
@@ -146,7 +146,6 @@ window* game::getWind() const		//returns a pointer to the graphics window
 }
 
 
-
 string game::getSrting() const
 {
 	string Label;
@@ -190,6 +189,8 @@ void game::setLevel(Levels level)
 	lvl = new Levels(level);
 }
 
+#include <iostream>
+
 void game::run()
 {
 	int x, y;
@@ -198,16 +199,14 @@ void game::run()
 	toolbarItem clickedItem = ITM_CNT;
 	setLevel(LVL1);
 	gameToolbar->GameStat();
-	RandomShape* randm= new RandomShape(this);
-	randm->draw();
-	
-	
+
+
 	//operation* buildRandShape = new RandomShape(this)
 	do
 	{
 		pWind->WaitMouseClick(x, y);
 		//new by ebrahim2
-		
+
 		if (y >= 0 && y < config.toolBarHeight)
 		{
 			clickedItem = gameToolbar->getItemClicked(x);
@@ -274,13 +273,18 @@ void game::run()
 				{
 					stillMoving = false;
 				}
+				else if (ktinput == ASCII && anotherKey == ' ')
+				{
 
+				}
 				shapesGrid->draw();
 
 			} while (stillMoving);
 		}
 
+		
 	} while (clickedItem != ITM_EXIT);
+	
 }
 
 

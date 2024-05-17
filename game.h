@@ -20,7 +20,6 @@ class game
 	/// Add more members if needed
 
 	toolbar* gameToolbar;
-
 	window* pWind;	//Pointer to the CMU graphics window
 	grid* shapesGrid;
 	window* ExitWindow;
@@ -36,10 +35,9 @@ public:
 	void printMessage(string msg) const;	//Print a message on Status bar
 	void createToolBar();		//creates the toolbar
 	void createGrid();		//creates the shapes grid
-
 	window* getWind() const;		//returns a pointer to the graphics window
 	grid* getGrid() const;		//returns a pointer to the shapes grid
-
+	void createRandomShape();
 	//creates an operation according to the toolbar item clicked
 	operation* createRequiredOperation(toolbarItem clickedItem);
 	Levels* getLevel();
@@ -49,4 +47,4 @@ public:
 	void run();	//start the game
 
 };
-// dkfmn
+
