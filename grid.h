@@ -2,7 +2,6 @@
 #include "CompositeShapes.h"
 //#include "RandomShape.h"
 class game;
-class RandomShape;
 class grid
 {
 	enum { MaxShapeCount = 1000  };	//assuming max shape count = 1000
@@ -11,7 +10,6 @@ class grid
 	int height, width;
 	point uprLeft;	//upper left point of the grid
 	shape* shapeList[MaxShapeCount];	//2D array of shape pointers
-	RandomShape* RandShape;
 	shape* activeShape;	//The shape that the user works on to match to the ranom shapes
 
 	int shapeCount = 1;		//current number of shapes in the list
@@ -25,8 +23,9 @@ public:
 	void setActiveShape(shape* actShape);
 	shape* getActiveShape() const;
 	void deleteActiveShape();
-	void setRandomShape(RandomShape* rndm);
+	void createRandomShape();
 	void countSteps(shape* actv);
+	bool matchingCheck();
 };
 
 

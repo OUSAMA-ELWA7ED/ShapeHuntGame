@@ -2,7 +2,9 @@
 #include "game.h"
 #include "gameConfig.h"
 #include "CompositeShapes.h"
-#include "RandomShape.h"
+#include <cstdlib>
+#include <time.h>
+//#include "RandomShape.h"
 
 grid::grid(point r_uprleft, int wdth, int hght, game* pG)
 {
@@ -13,7 +15,6 @@ grid::grid(point r_uprleft, int wdth, int hght, game* pG)
 	rows = height / config.gridSpacing;
 	cols = width / config.gridSpacing;
 	shapeCount = 0;
-	RandShape = nullptr;
 	for (int i = 0; i < MaxShapeCount; i++)
 		shapeList[i] = nullptr;
 
@@ -48,7 +49,6 @@ void grid::draw() const
 	if (activeShape) {
 		activeShape->draw();
 	}
-		//RandShape->draw();
 }
 
 void grid::clearGridArea() const
@@ -59,6 +59,22 @@ void grid::clearGridArea() const
 	pWind->DrawRectangle(uprLeft.x, uprLeft.y, uprLeft.x + width, uprLeft.y + height);
 }
 
+
+bool grid::matchingCheck()
+{
+	for (int i = 0; i < 7; i++)
+		if (activeShape == shapeList[i])
+		{
+			if (activeShape->getNumberOfResizeCalls() == shapeList[i]->getNumberOfResizeCalls())
+				if (activeShape->getRotationAngle() == shapeList[i]->getRotationAngle())
+					if(activeShape->getReferencePoint() == shapeList[i]->getReferencePoint())
+			return true;
+		}
+			
+	return false;
+
+}
+
 //Adds a shape to the randomly created shapes list.
 bool grid::addShape(shape* newShape)
 {
@@ -67,7 +83,7 @@ bool grid::addShape(shape* newShape)
 	// 2- check shape count doesn't exceed maximum count
 	// return false if any of the checks fail
 	/*for (int i = 0; i < shapeCount; i++)
-		shapeList[i] = newShape;*/
+		shapeList[i] = ;*/
 
 	
 	//Here we assume that the above checks are passed
@@ -77,6 +93,8 @@ bool grid::addShape(shape* newShape)
 
 void grid::setActiveShape(shape* actShape)
 {
+	/*if (activeShape)
+		delete activeShape;*/
 	activeShape = actShape;
 }
 
@@ -88,13 +106,112 @@ void grid::deleteActiveShape()
 	//delete activeShape;
 	activeShape = nullptr;
 }
-
-void grid::setRandomShape(RandomShape* rndm)
+#include <iostream>
+void grid::createRandomShape()
 {
-	RandShape = rndm;
+	Levels CurrentLevel = LVL4;
+	//Levels CurrentLevel = *pGame->getLevel();
+	int NumberOfShapes = int(CurrentLevel) * 2 - 1;
+	// randomChoice
+	srand(time(0));
+	for (int i = 0; i < NumberOfShapes; i++)
+	{
+		
+		point refPoint = { rand() % (config.windWidth + 1), config.gridHeight + rand() % (config.windHeight - config.GameStatusHeight - config.gridHeight + 1) };
+		point* ShapesRefPoints = new point[NumberOfShapes];
+		ShapeType stDetector = ShapeType(rand() % (ShapeEnd - 1));
+		std::cout << "Ref.x: " << refPoint.x << " ";
+		std::cout << "Ref.y: " << refPoint.y;
+		std::cout << endl;
+		switch (stDetector)
+		{
+		case SIGN:
+		{
+			Sign* NewSign = new Sign(pGame, refPoint);
+			NewSign->calcCorners();
+			NewSign->draw();
+			addShape(NewSign);
+			break;
+		}
+		case RCT:
+		{
+			Rect* NewRect = new Rect(pGame, refPoint, 100, 70);
+			NewRect->calcCorners();
+			NewRect->draw();
+			addShape(NewRect);
+			break;
+		}
+		case CRC:
+		{
+			circle* NewCircle = new circle(pGame, refPoint, 70);
+			NewCircle->calcCorners();
+			NewCircle->draw();
+			addShape(NewCircle);
+			break;
+		}
+		case EQ_TRI:
+		{
+			Equi_triangle* NewEqTrig = new Equi_triangle(pGame, refPoint, 75);
+			NewEqTrig->calcCorners();
+			NewEqTrig->draw();
+			addShape(NewEqTrig);
+			break;
+		}
+		case ISO_TRI:
+		{
+			Isso_triangle* NewIsoTrig = new Isso_triangle(pGame, refPoint, 100, 80);
+			NewIsoTrig->calcCorners();
+			NewIsoTrig->draw();
+			addShape(NewIsoTrig);
+			break;
+		}
+		case I:
+		{
+			I_Shape* NewI = new I_Shape(pGame, refPoint);
+			NewI->calcCorners();
+			NewI->draw();
+			addShape(NewI);
+			break;
+		}
+		case House:
+		{
+			cHouse* NewHouse = new cHouse(pGame, refPoint);
+			NewHouse->calcCorners();
+			NewHouse->draw();
+			addShape(NewHouse);
+			break;
+		}
+		case cap:
+		{
+			Cap* NewCap = new Cap(pGame, refPoint);
+			NewCap->calcCorners();
+			NewCap->draw();
+			addShape(NewCap);
+			break;
+		}
+		case envelop:
+		{
+			Envelope* NewEnv = new Envelope(pGame, refPoint);
+			NewEnv->calcCorners();
+			NewEnv->draw();
+			addShape(NewEnv);
+			break;
+		}
+		case Rocket:
+		{
+			rocket* NewRocket = new rocket(pGame, refPoint);
+			NewRocket->calcCorners();
+			NewRocket->draw();
+			addShape(NewRocket);
+			break;
+		}
+		}
+	}
 }
 
 void grid::countSteps(shape* avtv)
 {
 	int steps = 0;
+	
+
 }
