@@ -1,7 +1,7 @@
 #include "operations.h"
 #include "game.h"
 #include "CompositeShapes.h"
-#include "RandomShape.h"
+
 
 
 
@@ -35,8 +35,8 @@ void operAddSign::Act()
 	// Don't allow adding new shape if there is alreday an active shape
 	//align reference point to the nearest grid point
 
-	int xGrid = (config.RefX);
-	int yGrid = (config.RefY);
+	int xGrid = config.RefX - config.RefX % config.gridSpacing;;
+	int yGrid = config.RefX - config.RefX % config.gridSpacing;;
 	//take the aligned point as the sign shape ref point
 	point signShapeRef = { xGrid, yGrid };
 	//create a sign shape ==========================================> what's the purpose of the pointer to object shape
@@ -62,8 +62,8 @@ void operAddI_Shape::Act()
 
 	//align reference point to the nearest grid point
 
-	int xGrid = (config.RefX + 50);
-	int yGrid = (config.RefY + 30);
+	int xGrid = config.RefX - config.RefX % config.gridSpacing;;
+	int yGrid = config.RefX - config.RefX % config.gridSpacing;;
 
 	//take the aligned point as the sign shape ref point
 	point I_ShapeRef = { xGrid, yGrid };
@@ -95,8 +95,8 @@ void operAddHouse::Act()
 
 	//align reference point to the nearest grid point
 
-	int xGrid = (config.RefX);
-	int yGrid = (config.RefY);
+	int xGrid = config.RefX - config.RefX % config.gridSpacing;;
+	int yGrid = config.RefX - config.RefX % config.gridSpacing;;
 
 	//take the aligned point as the sign shape ref point
 	point House_ShapeRef = { xGrid, yGrid };
@@ -128,8 +128,8 @@ void operAddRocket::Act()
 
 	//align reference point to the nearest grid point
 
-	int xGrid = (config.RefX);
-	int yGrid = (config.RefY);
+	int xGrid = config.RefX - config.RefX % config.gridSpacing;;
+	int yGrid = config.RefX - config.RefX % config.gridSpacing;;
 
 	//take the aligned point as the sign shape ref point
 	point Rocket_ShapeRef = { xGrid, yGrid };
@@ -157,8 +157,8 @@ void operAddBlender::Act()
 
 	//align reference point to the nearest grid point
 
-	int xGrid = (config.RefX);
-	int yGrid = (config.RefY);
+	int xGrid = config.RefX - config.RefX % config.gridSpacing;;
+	int yGrid = config.RefX - config.RefX % config.gridSpacing;;
 
 	//take the aligned point as the sign shape ref point
 	point Blender_ShapeRef = { xGrid, yGrid };
@@ -185,8 +185,8 @@ void operAddEnv::Act()
 
 	//align reference point to the nearest grid point
 
-	int xGrid = (config.RefX);
-	int yGrid = (config.RefY);
+	int xGrid = config.RefX - config.RefX % config.gridSpacing;;
+	int yGrid = config.RefX - config.RefX % config.gridSpacing;;
 
 	//take the aligned point as the sign shape ref point
 	point Env_ShapeRef = { xGrid, yGrid };
@@ -215,8 +215,8 @@ void operAddCap::Act()
 
 	//align reference point to the nearest grid point
 
-	int xGrid = (config.RefX);
-	int yGrid = (config.RefY);
+	int xGrid = config.RefX - config.RefX % config.gridSpacing;;
+	int yGrid = config.RefX - config.RefX % config.gridSpacing;;
 
 	//take the aligned point as the sign shape ref point
 	point Cap_ShapeRef = { xGrid, yGrid };
@@ -368,16 +368,16 @@ void operDeleteThisShape::Act()
 	pGrid->deleteActiveShape();
 }
 
-BuildRandomShape::BuildRandomShape(game* r_pGame) : operation(r_pGame)
-{}
-
-void BuildRandomShape::Act()
-{
-	grid* pGrid = pGame->getGrid();
-	RandomShape* rndmShape = new RandomShape(pGame);
-	pGrid->setRandomShape(rndmShape);
-
-}
+//BuildRandomShape::BuildRandomShape(game* r_pGame) : operation(r_pGame)
+//{}
+//
+//void BuildRandomShape::Act()
+//{
+//	grid* pGrid = pGame->getGrid();
+//	RandomShape* rndmShape = new RandomShape(pGame);
+//	pGrid->setRandomShape(rndmShape);
+//
+//}
 
 
 //file operation.cpp

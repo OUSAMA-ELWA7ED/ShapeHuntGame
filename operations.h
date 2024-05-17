@@ -99,12 +99,12 @@ public:
 
 };
 
-class BuildRandomShape : public operation
-{
-public:
-	BuildRandomShape(game* r_pGame);
-	virtual void Act() override;
-};
+//class BuildRandomShape : public operation
+//{
+//public:
+//	BuildRandomShape(game* r_pGame);
+//	virtual void Act() override;
+//};
 
 
 //class operAddRect : public operation
