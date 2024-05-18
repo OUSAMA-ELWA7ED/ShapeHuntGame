@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <string>
 #include "gameConfig.h"
 using namespace std;
@@ -77,6 +78,11 @@ struct point
 		return false;
 	}
 
+	friend std::ostream& operator <<(std::ostream& out, const point& other)
+	{
+		out << "x: " << other.x << " " << "y: " << other.y;
+		return out;
+	}
 
 };
 
@@ -87,6 +93,7 @@ enum ShapeType
 	CRC,	//circle
 	EQ_TRI,	//triangle
 	ISO_TRI,
+	RIGHT_TRI,
 	SIGN,
 	I,
 	House,
@@ -115,6 +122,7 @@ protected:
 	color borderColor;	//shape border color
 	int iRotationAngle = 0;
 	int iResizeCalls = 0;
+	ShapeType type;
 	//int iRotationCalls = 0;
 public:
 	shape(game* r_pGame, point ref);
@@ -136,6 +144,7 @@ public:
 	//virtual void save(ofstream &OutFile) = 0;	//Save the shape parameters to the file
 	//virtual void load(ifstream &Infile) = 0;	//Load the shape parameters to the file
 
+	virtual ShapeType getShapeType() = 0;
 };
 
 

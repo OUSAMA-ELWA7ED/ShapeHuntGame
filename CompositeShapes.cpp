@@ -71,18 +71,15 @@ void Sign::resizeDown()
 	
 }
 
-//void Sign::move()
-//{
-//	top->move();
-//	base->move();
-//}
+
+ShapeType Sign::getShapeType() { return type = SIGN; }
 
 
 I_Shape::I_Shape(game* r_pGame, point ref) : shape(r_pGame, ref)
 {
-	point midRef = ref;
-	point topRef = {ref.x, ref.y - config.I_Shape.midHeight / 2 - config.I_Shape.topHeight / 2};
-	point baseRef = {ref.x, ref.y + config.I_Shape.baseHeight / 2 + config.I_Shape.midHeight / 2};
+	midRef = ref;
+	topRef = {ref.x, ref.y - config.I_Shape.midHeight / 2 - config.I_Shape.topHeight / 2};
+	baseRef = {ref.x, ref.y + config.I_Shape.baseHeight / 2 + config.I_Shape.midHeight / 2};
 	// ==============================================================================
 	rect_pMid = new Rect(pGame, midRef, config.I_Shape.midHeight, config.I_Shape.midWdth);
 	top = new Rect(pGame, topRef, config.I_Shape.topHeight, config.I_Shape.topWdth);
@@ -94,10 +91,17 @@ I_Shape::I_Shape(game* r_pGame, point ref) : shape(r_pGame, ref)
 
 void I_Shape::rotate()
 {
-
+	
 }
 
-void I_Shape::move(int step, bool isVerical){}
+void I_Shape::move(int step, bool isVerical)
+{
+	base->move(step,isVerical);
+	top->move(step, isVerical);
+	rect_pMid->move(step, isVerical);
+	midRef.move(step, isVerical);
+	
+}
 
 void I_Shape::draw() 
 {
@@ -106,9 +110,14 @@ void I_Shape::draw()
 	rect_pMid->draw();
 }
 
-//void I_Shape::move(){}
 
-void I_Shape::calcCorners() {}
+
+void I_Shape::calcCorners() 
+{
+	base->calcCorners();
+	top->calcCorners();
+	rect_pMid->calcCorners();
+}
 void I_Shape::resizeUp()
 {
 	//base->resizeUp();
@@ -150,6 +159,7 @@ void I_Shape::resizeDown()
 	calcCorners();
 }
 
+ShapeType I_Shape::getShapeType() { return type = I; }
 cHouse::cHouse(game* r_pGame, point ref) : shape(r_pGame, ref)
 {
 	baseRef = ref;
@@ -170,7 +180,12 @@ void cHouse::draw()
 	//test->draw();
 }
 
-void cHouse::calcCorners() {}
+void cHouse::calcCorners() 
+{
+	head->calcCorners();
+	base->calcCorners();
+}
+
 void rocket::calcCorners() {}
 void Blender::calcCorners() {}
 void Envelope::calcCorners() {}
@@ -227,9 +242,14 @@ void cHouse::resizeDown()
 	calcCorners();
 }
 
-void cHouse::move(int step, bool isVerical) {}
+void cHouse::move(int step, bool isVerical) 
+{
+	head->move(step, isVerical);
+	base->move(step, isVerical);
+	baseRef.move(step, isVerical);
+}
 
-//void House::move(){}
+ShapeType cHouse::getShapeType() { return type = House; }
 
 
 rocket::rocket(game* r_pGame, point ref) : shape(r_pGame, ref)
@@ -321,6 +341,8 @@ void rocket::resizeDown()
 void rocket::move(int step, bool isVerical)
 {
 }
+
+ShapeType rocket::getShapeType() { return type = Rocket; }
 
 Blender::Blender(game* r_pGame, point ref) : shape(r_pGame, ref) {
 	BodyRectRef = ref;
@@ -433,6 +455,8 @@ void Blender::resizeDown()
 
 }
 
+ShapeType Blender::getShapeType() { return type = blender; }
+
 Envelope::Envelope(game* r_pGame, point ref) : shape(r_pGame, ref)
 {
 	BodyRectRef = ref;
@@ -518,7 +542,7 @@ void Envelope::resizeDown()
 }
 
 void Envelope::move(int step, bool isVerical){}
-
+ShapeType Envelope::getShapeType() { return type = envelop; }
 
 Cap::Cap(game* r_pGame, point ref) :shape(r_pGame, ref) {
 
@@ -596,7 +620,7 @@ void Cap::resizeDown()
 
 void Cap::move(int step, bool isVerical){}
 
-
+ShapeType Cap::getShapeType() { return type = cap; }
 
 
 
@@ -607,8 +631,6 @@ void cHouse::flip()
 {
 	point* mine = base->getLowerBottom();
 	head->getUpperPoint()->flip(*base->getLowerBottom());
-	//head->getRightLower()->flip(headRef);
-	//head->getleftLower()->flip()
 	base->getLowerBottom()->flip(*head->getUpperPoint());
 }
 

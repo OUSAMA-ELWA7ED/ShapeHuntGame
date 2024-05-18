@@ -405,3 +405,16 @@ Levels* lvl=pGame->getLevel();
 		}
 }
 
+CallHint::CallHint(game* r_pGame) : operation(r_pGame){}
+void CallHint::Act(){}
+
+Refresh::Refresh(game* r_pGame) : operation(r_pGame)
+{}
+
+void Refresh::Act()
+{
+	window* pWind = pGame->getWind();
+	grid* pGrid = pGame->getGrid();
+	pGrid->resetShapeCount();
+	pGrid->createRandomShape();
+}

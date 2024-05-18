@@ -99,14 +99,17 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 	case ITM_ROTATE:
 		op = new operMakeRotation(this);
 		game::printMessage("You Clicked on 'Rotate' Operation");
+		NumberOfSteps++;
 		break;
 	case ITM_DCR:
 		op = new operResizeDown(this);
 		game::printMessage("You Clicked on 'Resize Down' Operation");
+		NumberOfSteps++;
 		break;
 	case ITM_INCR:
 		op = new operResizeUp(this);
 		game::printMessage("You Clicked on 'Resize Up' Operation");
+		NumberOfSteps++;
 		break;
 	case ITM_EXIT:
 		op = new operExit(this);
@@ -114,12 +117,19 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 		break;
 	}
 	case ITM_HNT:
-		op = new operDeleteThisShape(this);
-	game::printMessage("You Clicked on 'Hint' Operation");
+		op = new CallHint(this);
+		game::printMessage("You Clicked on 'Hint' Operation");
 		break;
 	case ITM_DEL:
 		op = new operDeleteThisShape(this);
-	game::printMessage("You Clicked on 'Delete' Operation");
+		game::printMessage("You Clicked on 'Delete' Operation");
+		NumberOfSteps++;
+		break;
+	case ITM_REFRESH:
+		op = new Refresh(this);
+		game::printMessage("You've clicked on 'Refresh' Random Shape has been re-drawn.");
+		NumberOfSteps++;
+		break;
 	}
 
 
@@ -188,6 +198,8 @@ void game::setLevel(Levels level)
 {
 	lvl = new Levels(level);
 }
+
+int* game::getNumberOfSteps() { return &NumberOfSteps; }
 
 #include <iostream>
 
@@ -275,7 +287,20 @@ void game::run()
 				}
 				else if (ktinput == ASCII && anotherKey == ' ')
 				{
+					std::cout << shapesGrid->getActiveShape()->getReferencePoint();
+					bool checker = shapesGrid->matchingCheck();
+					if (checker == true)
+					{
+						clearStatusBar();
+						printMessage("Congrats! You've Matched it Correctly!");
+						shapesGrid->editShapeList(shapesGrid->getMatchedShapeIndex(),nullptr,true);
+					}
+					else
+					{
+						clearStatusBar();
+						printMessage("Sorry, You didn't match correctly, you've lost 5 points");
 
+					}
 				}
 				shapesGrid->draw();
 

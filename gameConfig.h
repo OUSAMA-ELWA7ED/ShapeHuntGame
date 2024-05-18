@@ -9,7 +9,7 @@
 __declspec(selectany) //This line to prevent "redefinition error"
 struct
 {
-	int	windWidth = 1200, windHeight = 800,	//Window width and height
+	int	windWidth = 1200, windHeight = 600,	//Window width and height
 		wx = 5, wy = 5,			//Window starting coordinates
 
 		//The window is divded into 3 areas: toolbar, Working area, and statusbar
@@ -106,6 +106,7 @@ enum toolbarItem //The items of the  toolbar (you should add more items)
 	ITM_ROCKET,
 	ITM_I,
 	ITM_DEL,
+	ITM_REFRESH,
 	ITM_CNT		//no. of toolbar items ==> This should be the last line in this enum
 
 };

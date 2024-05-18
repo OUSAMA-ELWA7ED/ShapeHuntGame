@@ -63,16 +63,35 @@ void grid::clearGridArea() const
 bool grid::matchingCheck()
 {
 	for (int i = 0; i < 7; i++)
-		if (activeShape == shapeList[i])
+	{
+		if (!shapeList[i])
+			continue;
+		if (activeShape->getShapeType() == shapeList[i]->getShapeType())
 		{
-			if (activeShape->getNumberOfResizeCalls() == shapeList[i]->getNumberOfResizeCalls())
-				if (activeShape->getRotationAngle() == shapeList[i]->getRotationAngle())
-					if(activeShape->getReferencePoint() == shapeList[i]->getReferencePoint())
-			return true;
+			//if (activeShape->getNumberOfResizeCalls() == shapeList[i]->getNumberOfResizeCalls())
+				//if (activeShape->getRotationAngle() == shapeList[i]->getRotationAngle())
+			if (activeShape->getReferencePoint() == shapeList[i]->getReferencePoint())
+			{
+				MatchedShapeIndex = i;
+				return true;
+
+			}
 		}
-			
+	}
 	return false;
 
+}
+
+int grid::getMatchedShapeIndex() { return MatchedShapeIndex; }
+void grid::editShapeList(int Index, shape* Value, bool wannaRemove)
+{
+	if (wannaRemove)
+	{
+		delete shapeList[Index];
+		shapeList[Index] = Value;
+	}
+	else
+		shapeList[Index] = Value;
 }
 
 //Adds a shape to the randomly created shapes list.
@@ -84,12 +103,19 @@ bool grid::addShape(shape* newShape)
 	// return false if any of the checks fail
 	/*for (int i = 0; i < shapeCount; i++)
 		shapeList[i] = ;*/
+	/*if (shapeList[shapeCount])
+	{
+		delete shapeList[shapeCount];
+		shapeList[shapeCount] = nullptr;
+	}*/
 
 	
 	//Here we assume that the above checks are passed
 	shapeList[shapeCount++] = newShape;
 	return true;
 }
+
+void grid::resetShapeCount() { shapeCount = 0; }
 
 void grid::setActiveShape(shape* actShape)
 {
@@ -103,7 +129,7 @@ shape* grid::getActiveShape() const { return activeShape; }
 
 void grid::deleteActiveShape()
 {
-	//delete activeShape;
+	delete activeShape;
 	activeShape = nullptr;
 }
 #include <iostream>
@@ -112,62 +138,37 @@ void grid::createRandomShape()
 	Levels CurrentLevel = LVL4;
 	//Levels CurrentLevel = *pGame->getLevel();
 	int NumberOfShapes = int(CurrentLevel) * 2 - 1;
+	for (int i = 0; i < NumberOfShapes+1; i++)
+	{
+		if (shapeList[i])
+		{
+			delete shapeList[i];
+			shapeList[i] = nullptr;
+		}
+	}
+	
 	// randomChoice
 	srand(time(0));
 	for (int i = 0; i < NumberOfShapes; i++)
 	{
 		
 		point refPoint = { rand() % (config.windWidth + 1), config.gridHeight + rand() % (config.windHeight - config.GameStatusHeight - config.gridHeight + 1) };
+		point RequiredRefPoint = { refPoint.x - refPoint.x % config.gridSpacing, refPoint.y - refPoint.y % config.gridSpacing };
 		point* ShapesRefPoints = new point[NumberOfShapes];
 		ShapeType stDetector = ShapeType(rand() % (ShapeEnd - 1));
-		std::cout << "Ref.x: " << refPoint.x << " ";
-		std::cout << "Ref.y: " << refPoint.y;
-		std::cout << endl;
 		switch (stDetector)
 		{
 		case SIGN:
 		{
-			Sign* NewSign = new Sign(pGame, refPoint);
+			Sign* NewSign = new Sign(pGame, RequiredRefPoint);
 			NewSign->calcCorners();
 			NewSign->draw();
 			addShape(NewSign);
 			break;
 		}
-		case RCT:
-		{
-			Rect* NewRect = new Rect(pGame, refPoint, 100, 70);
-			NewRect->calcCorners();
-			NewRect->draw();
-			addShape(NewRect);
-			break;
-		}
-		case CRC:
-		{
-			circle* NewCircle = new circle(pGame, refPoint, 70);
-			NewCircle->calcCorners();
-			NewCircle->draw();
-			addShape(NewCircle);
-			break;
-		}
-		case EQ_TRI:
-		{
-			Equi_triangle* NewEqTrig = new Equi_triangle(pGame, refPoint, 75);
-			NewEqTrig->calcCorners();
-			NewEqTrig->draw();
-			addShape(NewEqTrig);
-			break;
-		}
-		case ISO_TRI:
-		{
-			Isso_triangle* NewIsoTrig = new Isso_triangle(pGame, refPoint, 100, 80);
-			NewIsoTrig->calcCorners();
-			NewIsoTrig->draw();
-			addShape(NewIsoTrig);
-			break;
-		}
 		case I:
 		{
-			I_Shape* NewI = new I_Shape(pGame, refPoint);
+			I_Shape* NewI = new I_Shape(pGame, RequiredRefPoint);
 			NewI->calcCorners();
 			NewI->draw();
 			addShape(NewI);
@@ -175,7 +176,7 @@ void grid::createRandomShape()
 		}
 		case House:
 		{
-			cHouse* NewHouse = new cHouse(pGame, refPoint);
+			cHouse* NewHouse = new cHouse(pGame, RequiredRefPoint);
 			NewHouse->calcCorners();
 			NewHouse->draw();
 			addShape(NewHouse);
@@ -183,7 +184,7 @@ void grid::createRandomShape()
 		}
 		case cap:
 		{
-			Cap* NewCap = new Cap(pGame, refPoint);
+			Cap* NewCap = new Cap(pGame, RequiredRefPoint);
 			NewCap->calcCorners();
 			NewCap->draw();
 			addShape(NewCap);
@@ -191,7 +192,7 @@ void grid::createRandomShape()
 		}
 		case envelop:
 		{
-			Envelope* NewEnv = new Envelope(pGame, refPoint);
+			Envelope* NewEnv = new Envelope(pGame, RequiredRefPoint);
 			NewEnv->calcCorners();
 			NewEnv->draw();
 			addShape(NewEnv);
@@ -199,10 +200,26 @@ void grid::createRandomShape()
 		}
 		case Rocket:
 		{
-			rocket* NewRocket = new rocket(pGame, refPoint);
+			rocket* NewRocket = new rocket(pGame, RequiredRefPoint);
 			NewRocket->calcCorners();
 			NewRocket->draw();
 			addShape(NewRocket);
+			break;
+		}
+		case blender:
+		{
+			Blender* NewBlender = new Blender(pGame, RequiredRefPoint);
+			NewBlender->calcCorners();
+			NewBlender->draw();
+			addShape(NewBlender);
+			break;
+		} 
+		default:
+		{
+			Blender* NewBlender = new Blender(pGame, RequiredRefPoint);
+			NewBlender->calcCorners();
+			NewBlender->draw();
+			addShape(NewBlender);
 			break;
 		}
 		}

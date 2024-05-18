@@ -12,7 +12,7 @@ toolbar::toolbar(game* pG)
 	live = 5;
 	score = 0;
 	level = 0;
-
+	NumOfSteps = 0;
 	height = config.toolBarHeight;
 	width = config.windWidth;
 	this->pGame = pG;
@@ -35,6 +35,7 @@ toolbar::toolbar(game* pG)
 	toolbarItemImages[ITM_ROCKET] = "images\\toolbarItems\\Rocket.jpg";
 	toolbarItemImages[ITM_I] = "images\\toolbarItems\\I_Shape.jpg";
 	toolbarItemImages[ITM_DEL] = "images\\toolbarItems\\Delete.jpg";
+	toolbarItemImages[ITM_REFRESH] = "images\\toolbarItems\\Refresh2.jpg";
 	
 	
 	//TODO: Prepare image for each toolbar item and add it to the list
@@ -52,7 +53,7 @@ toolbar::toolbar(game* pG)
  void toolbar::GameStat(){
 
 	window* pWind = pGame->getWind();
-	
+	NumOfSteps = pGame->getNumberOfSteps();
 	//new by ebrahim
 		//Draw a game status
 	pWind->SetPen(BLACK, 1);
@@ -60,9 +61,11 @@ toolbar::toolbar(game* pG)
 	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight, "Lives:" + to_string(live));
 	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight - config.seprator, "Score:" + to_string(score));
 	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight - 2 * (config.seprator), "Level:" + to_string(level));
+	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight +  (config.seprator), "Steps:" + to_string(*NumOfSteps));
+	//pWind->~window();
 }
 
-
+ 
 
 //handles clicks on toolbar icons, returns ITM_CNT if the click is not inside the toolbar
 toolbarItem toolbar::getItemClicked(int x)

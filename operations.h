@@ -99,20 +99,6 @@ public:
 
 };
 
-//class BuildRandomShape : public operation
-//{
-//public:
-//	BuildRandomShape(game* r_pGame);
-//	virtual void Act() override;
-//};
-
-
-//class operAddRect : public operation
-//{
-//public:
-//	operAddRect(game* r_pGame);
-//	virtual void Act();
-//};
 class operResizeDown : public operation
 {
 public:
@@ -128,12 +114,14 @@ public:
 };
 
 
-//class operAddRect : public operation
-//{
-//public:
-//	operAddRect(game* r_pGame);
-//	virtual void Act();
-//};
+class CallHint : public operation
+{
+public:
+	CallHint(game* r_pGame);
+	virtual void Act();
+};
+
+
 class operExit : public operation
 {
 public:
@@ -147,5 +135,12 @@ class operSelect_level:public operation
 public:
 operSelect_level(game* r_pGame);
 virtual void Act();
+};
+
+class Refresh : public operation
+{
+public:
+	Refresh(game* r_pGame);
+	virtual void Act();
 };
 

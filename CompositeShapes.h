@@ -25,7 +25,7 @@ class Sign : public shape
 {
 	Rect* base;
 	Rect* top;
-	point topRef;	
+	point& topRef = RefPoint;	
 	point baseRef;
 	int refpointx;
 	int refpointy;
@@ -38,7 +38,7 @@ public:
 	virtual void flip() override;
 	virtual void resizeUp() override;
 	virtual void resizeDown() override;
-
+	virtual ShapeType getShapeType() override;
 	
 	//void move();
 	//virtual void move() override;
@@ -55,6 +55,9 @@ class I_Shape : public shape // Ref at mid rect
 	Rect* rect_pMid;
 	int refpointx;
 	int refpointy;
+	point& midRef = RefPoint;
+	point topRef;
+	point baseRef;
 public:
 	I_Shape(game* r_pGame, point ref);
 	virtual void draw();
@@ -65,14 +68,14 @@ public:
 	//virtual void move() override;
 	virtual void resizeUp() override;
 	virtual void resizeDown() override;
-
+	virtual ShapeType getShapeType() override;
 };
 
 class cHouse : public shape
 {
 	Rect* base;
 	Isso_triangle* head;
-	point baseRef;
+	point& baseRef = RefPoint;
 	point headRef;
 	int refpointx;
 	int refpointy;
@@ -86,7 +89,7 @@ public:
 	virtual void flip() override;
 	virtual void resizeUp() override;
 	virtual void resizeDown()override;
-
+	virtual ShapeType getShapeType() override;
 	//virtual void move() override;
 };
 
@@ -114,7 +117,7 @@ public:
 	virtual void flip() override;
 	virtual void resizeUp()override;
 	virtual void resizeDown()override;
-
+	virtual ShapeType getShapeType() override;
 };
 
 
@@ -142,7 +145,7 @@ public:
 	virtual void flip() override;
 	virtual void resizeUp()override;
 	virtual void resizeDown()override;
-
+	virtual ShapeType getShapeType() override;
 };
 
 
@@ -168,7 +171,7 @@ public:
 	virtual void flip() override;
 	virtual void resizeUp()override;
 	virtual void resizeDown()override;
-
+	virtual ShapeType getShapeType() override;
 };
 
 
@@ -192,7 +195,7 @@ public:
 	virtual void flip() override;
 	virtual void resizeUp() override;
 	virtual void resizeDown()override;
-
+	virtual ShapeType getShapeType() override;
 };
 
 

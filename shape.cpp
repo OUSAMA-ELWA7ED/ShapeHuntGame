@@ -19,8 +19,7 @@ point shape::getReferencePoint() { return RefPoint; }
 
 shape::~shape()
 {
-	delete pGame;
-	pGame = nullptr;
+	
 }
 
 void shape::move(int step, bool isVertical)

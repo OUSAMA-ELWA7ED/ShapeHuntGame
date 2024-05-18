@@ -24,6 +24,7 @@ class game
 	grid* shapesGrid;
 	window* ExitWindow;
 	Levels* lvl;
+	int NumberOfSteps = 5;
 
 public:
 	game();
@@ -37,12 +38,12 @@ public:
 	void createGrid();		//creates the shapes grid
 	window* getWind() const;		//returns a pointer to the graphics window
 	grid* getGrid() const;		//returns a pointer to the shapes grid
-	void createRandomShape();
+	int* getNumberOfSteps();
 	//creates an operation according to the toolbar item clicked
 	operation* createRequiredOperation(toolbarItem clickedItem);
 	Levels* getLevel();
 	void setLevel(Levels level);
-
+	
 
 	void run();	//start the game
 
