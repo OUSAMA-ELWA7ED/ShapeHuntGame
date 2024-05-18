@@ -232,3 +232,9 @@ void grid::countSteps(shape* avtv)
 	
 
 }
+void grid::save() {
+	for (int i = 0; i < 1000; i++)
+		if(shapeList[i])
+		shapeList[i]->save(OutFile);
+     
+}
