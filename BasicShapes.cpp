@@ -367,3 +367,19 @@ void Isso_triangle::flip()
 }
 void Equi_triangle::flip(){}
 void Right_triangle::flip(){}
+//save collection by ebrahim 3
+void Rect::save(ofstream& OutFile) {
+
+}
+void Right_triangle::save(ofstream& OutFile) {
+
+}
+void Isso_triangle::save(ofstream& OutFile) {
+
+}
+void Equi_triangle::save(ofstream& OutFile) {
+
+}
+void circle::save(ofstream& OutFile) {
+
+}
