@@ -24,6 +24,7 @@ public:
 	point* getLowerBottom();
 	virtual ShapeType getShapeType() override;
 	//point* getRefPoint();
+	virtual void save(ofstream& OutFile);
 };
 
 
@@ -44,6 +45,7 @@ public:
 	virtual void rotate() override;
 	point* getRefPoint();
 	virtual ShapeType getShapeType() override;
+	virtual void save(ofstream& OutFile);
 };
 
 class Equi_triangle : public shape
@@ -61,6 +63,7 @@ public:
 	virtual void resizeDown() override;
 	virtual void resizeUp() override;
 	virtual ShapeType getShapeType() override;
+	virtual void save(ofstream& OutFile);
 };
 class Isso_triangle : public shape
 {
@@ -80,7 +83,7 @@ public:
 	virtual void resizeDown() override;
 	virtual void resizeUp() override;
 	virtual ShapeType getShapeType() override;
-
+	virtual void save(ofstream& OutFile);
 	//virtual void move() override;
 };
 
@@ -104,5 +107,5 @@ public:
 	virtual void resizeDown() override;
 	virtual void resizeUp() override;
 	virtual ShapeType getShapeType() override;
-
+	virtual void save(ofstream& OutFile);
 };
