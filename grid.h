@@ -18,7 +18,7 @@ class grid
 	int MatchedShapeIndex;
 	int shapeCount = 1;		//current number of shapes in the list
 	game* pGame;
-
+        ofstream OutFile;//new file to save data by hema
 public:
 	grid(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	~grid();
@@ -34,6 +34,7 @@ public:
 	int getMatchedShapeIndex();
 	void editShapeList(int Index, shape* Value, bool wannaRemove);
 	void resetShapeCount();
+	void save();
 };
 
 
