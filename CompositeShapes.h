@@ -29,6 +29,10 @@ class Sign : public shape
 	point baseRef;
 	int refpointx;
 	int refpointy;
+	int csth;
+	int cstw;
+	int csbh;
+	int csbw;
 public:
 	Sign(game* r_pGame, point ref);
 	virtual void draw();
@@ -58,6 +62,12 @@ class I_Shape : public shape // Ref at mid rect
 	point& midRef = RefPoint;
 	point topRef;
 	point baseRef;
+	int midHeight;
+	int midWidth;
+	int topHeight;
+	int topWidth;
+	int baseHeight;
+	int baseWidth;
 public:
 	I_Shape(game* r_pGame, point ref);
 	virtual void draw();
@@ -81,6 +91,10 @@ class cHouse : public shape
 	int refpointx;
 	int refpointy;
 	//circle* test;
+	int baseHeight;
+	int baseWidth;
+	int headBase;
+	int headHeight;
 public:
 	cHouse(game* r_pGame, point ref);
 	virtual void draw();
@@ -109,6 +123,14 @@ class rocket : public shape
 	Right_triangle* triangle_pBottomLeft;
 	int refpointx;
 	int refpointy;
+	int baseRectHeight;
+	int baseRectWidth;
+	int headTriBase;
+	int headTriHeight;
+	int LowerRightTriWidth;
+	int LowerRightTriHeight;
+	int LowerLeftTriWidth;
+	int LowerLeftTriHeight;
 
 public:
 	rocket(game* r_pGame, point ref);
@@ -139,6 +161,17 @@ class Blender : public shape {
 	Right_triangle* triangle_pBottomLeft;
 	int refpointx;
 	int refpointy;
+	int Rect1Height;
+	int Rect1Width;
+	int Rect2Height;
+	int Rect2Width;
+	int Rect3Height;
+	int Rect3Width;
+	int circleRad;
+	int RTriBase;
+	int RTriHeight;
+	int LTriBase;
+	int LTriHeight;
 public:
 	Blender(game* r_pGame, point ref);
 	virtual void draw();
@@ -166,6 +199,10 @@ class Envelope : public shape
 	Right_triangle* TriLeft;
 	int refpointx;
 	int refpointy;
+	int RectHeight;
+	int RectWidth;
+	int TriBase;
+	int TriHeight;
 public:
 	Envelope(game* r_pGame, point ref);
 	virtual void draw();
@@ -191,6 +228,11 @@ class Cap : public shape
 	circle* topCircle;
 	int refpointx;
 	int refpointy;
+	int RectHeight;
+	int RectWidth;
+	int TriBase;
+	int TriHeight;
+	int circlerad;
 public:
 	Cap(game* r_pGame, point ref);
 	virtual void draw();
