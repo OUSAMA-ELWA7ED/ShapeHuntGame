@@ -39,9 +39,6 @@ public:
 	virtual void resizeUp() override;
 	virtual void resizeDown() override;
 	virtual ShapeType getShapeType() override;
-	
-	//void move();
-	//virtual void move() override;
 
 };
 

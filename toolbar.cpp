@@ -36,6 +36,7 @@ toolbar::toolbar(game* pG)
 	toolbarItemImages[ITM_I] = "images\\toolbarItems\\I_Shape.jpg";
 	toolbarItemImages[ITM_DEL] = "images\\toolbarItems\\Delete.jpg";
 	toolbarItemImages[ITM_REFRESH] = "images\\toolbarItems\\Refresh2.jpg";
+	toolbarItemImages[ITM_SLCTLVL] = "images\\toolbarItems\\SelectLevel.jpg";
 	
 	
 	//TODO: Prepare image for each toolbar item and add it to the list

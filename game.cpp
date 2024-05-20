@@ -13,6 +13,7 @@ game::game()
 	//Create and draw the grid
 	createGrid();
 	shapesGrid->draw();
+	setLevel(LVL1);
 	shapesGrid->createRandomShape();
 	//draw the grid and all shapes it contains.
 	clearStatusBar();
@@ -130,6 +131,10 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 		game::printMessage("You've clicked on 'Refresh' Random Shape has been re-drawn.");
 		NumberOfSteps++;
 		break;
+	case ITM_SLCTLVL:
+		op = new operSelect_level(this);
+		game::printMessage("You're selecting a level, the game won't run until choose a level between 1:5");
+		break;
 	}
 
 
@@ -201,6 +206,10 @@ void game::setLevel(Levels level)
 
 int* game::getNumberOfSteps() { return &NumberOfSteps; }
 
+
+
+
+
 #include <iostream>
 
 void game::run()
@@ -209,7 +218,7 @@ void game::run()
 	bool isExit = false;
 	pWind->ChangeTitle("- - - - - - - - - - SHAPE HUNT (CIE 101 / CIE202 - project) - - - - - - - - - -");
 	toolbarItem clickedItem = ITM_CNT;
-	setLevel(LVL1);
+	//setLevel(LVL1);
 	gameToolbar->GameStat();
 
 
@@ -217,7 +226,13 @@ void game::run()
 	do
 	{
 		pWind->WaitMouseClick(x, y);
-		//new by ebrahim2
+
+		/*if(lvl = nullptr)
+			while (!lvl)
+			{
+				printMessage("Please Select Level From 1:5 to start");
+			}*/
+
 
 		if (y >= 0 && y < config.toolBarHeight)
 		{

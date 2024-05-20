@@ -23,7 +23,7 @@ class game
 	window* pWind;	//Pointer to the CMU graphics window
 	grid* shapesGrid;
 	window* ExitWindow;
-	Levels* lvl;
+	Levels* lvl = nullptr;
 	int NumberOfSteps = 5;
 
 public:
