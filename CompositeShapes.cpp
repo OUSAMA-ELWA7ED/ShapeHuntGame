@@ -1,5 +1,6 @@
 #include "CompositeShapes.h"
 #include "gameConfig.h"
+#include <fstream>
 
 ////////////////////////////////////////////////////  class Sign  ///////////////////////////////////////
 Sign::Sign(game* r_pGame, point ref) :shape(r_pGame, ref)
@@ -647,3 +648,55 @@ void Envelope::flip()
 void rocket::flip() {}
 void Blender::flip() {}
 void Cap::flip() {}
+//save collection by ebrahim3
+//=====================================================
+void Cap::save(ofstream& OutFile) {
+	OutFile.open("savedata.txt");
+	OutFile << MidTriRef.x << endl;
+	OutFile << MidTriRef.y << endl;
+	OutFile << iResizeCalls << endl;
+	OutFile << iRotationAngle << endl;
+
+}
+void Envelope::save(ofstream& OutFile) {
+	OutFile.open("savedata.txt");
+	OutFile << BodyRectRef.x << endl;
+	OutFile << BodyRectRef.y << endl;
+	OutFile << iResizeCalls << endl;
+	OutFile << iRotationAngle << endl;
+}
+void Blender::save(ofstream& OutFile) {
+	OutFile.open("savedata.txt");
+	OutFile << BodyRectRef.x << endl;
+	OutFile << BodyRectRef.y << endl;
+	OutFile << iResizeCalls << endl;
+	OutFile << iRotationAngle << endl;
+}
+void rocket::save(ofstream& OutFile) {
+	OutFile.open("savedata.txt");
+	OutFile << baseRectRef.x << endl;
+	OutFile << baseRectRef.y << endl;
+	OutFile << iResizeCalls << endl;
+	OutFile << iRotationAngle << endl;
+}
+void cHouse::save(ofstream& OutFile) {
+	OutFile.open("savedata.txt");
+	OutFile << baseRef.x << endl;
+	OutFile << baseRef.y << endl;
+	OutFile << iResizeCalls << endl;
+	OutFile << iRotationAngle << endl;
+}
+void I_Shape::save(ofstream& OutFile) {
+	OutFile.open("savedata.txt");
+	OutFile << midRef.x << endl;
+	OutFile << midRef.y << endl;
+	OutFile << iResizeCalls << endl;
+	OutFile << iRotationAngle << endl;
+}
+void Sign::save(ofstream& OutFile) {
+	OutFile.open("savedata.txt");
+	OutFile << topRef.x << endl;
+	OutFile << topRef.y << endl;
+	OutFile << iResizeCalls << endl;
+	OutFile << iRotationAngle << endl;
+}

@@ -39,6 +39,9 @@ public:
 	virtual void resizeUp() override;
 	virtual void resizeDown() override;
 	virtual ShapeType getShapeType() override;
+	virtual void save(ofstream& OutFile);
+	//void move();
+	//virtual void move() override;
 
 };
 
@@ -66,6 +69,7 @@ public:
 	virtual void resizeUp() override;
 	virtual void resizeDown() override;
 	virtual ShapeType getShapeType() override;
+	virtual void save(ofstream& OutFile);
 };
 
 class cHouse : public shape
@@ -87,6 +91,7 @@ public:
 	virtual void resizeUp() override;
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
+	virtual void save(ofstream& OutFile);
 	//virtual void move() override;
 };
 
@@ -115,6 +120,7 @@ public:
 	virtual void resizeUp()override;
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
+	virtual void save(ofstream& OutFile);
 };
 
 
@@ -143,6 +149,7 @@ public:
 	virtual void resizeUp()override;
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
+	virtual void save(ofstream& OutFile);
 };
 
 
@@ -169,6 +176,7 @@ public:
 	virtual void resizeUp()override;
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
+	virtual void save(ofstream& OutFile);
 };
 
 
@@ -193,6 +201,7 @@ public:
 	virtual void resizeUp() override;
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
+	virtual void save(ofstream& OutFile);
 };
 
 
