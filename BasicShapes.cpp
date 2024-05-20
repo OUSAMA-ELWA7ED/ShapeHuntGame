@@ -74,7 +74,7 @@ void Rect::move(int step, bool isVerical)
 
 point* Rect::getLowerBottom() { return &lowerBottom; }
 point* Rect::getUpperLeft() { return &upperLeft; }
-ShapeType Rect::getShapeType() { return type = RCT; }
+ShapeType Rect::getShapeType() { }
 
 
 
@@ -122,7 +122,7 @@ void circle::resizeDown()
 	rad /= 2;
 }
 
-ShapeType circle::getShapeType() { return type = CRC; }
+ShapeType circle::getShapeType() {  }
 
 
 
@@ -189,7 +189,7 @@ void Equi_triangle::resizeDown()
 	rightLowerPoint.x = RefPoint.x + base / 2;
 }
 
-ShapeType Equi_triangle::getShapeType() { return type = EQ_TRI; }
+ShapeType Equi_triangle::getShapeType() { }
 
 Isso_triangle::Isso_triangle(game* r_pGame, point ref, int Base,int Height) : shape(r_pGame, ref)
 {
@@ -292,7 +292,7 @@ void Isso_triangle::resizeDown() {
 	base = newBase;
 }
 
-ShapeType Isso_triangle::getShapeType() { return type = ISO_TRI; }
+ShapeType Isso_triangle::getShapeType() {}
 
 Right_triangle::Right_triangle(game* r_pGame, point ref, int Base, int Height) : shape(r_pGame, ref)
 {
@@ -352,7 +352,7 @@ void Right_triangle::resizeDown()
 	rightLowerPoint.y = RefPoint.y;
 }
 
-ShapeType Right_triangle::getShapeType() { return type = RIGHT_TRI; }
+ShapeType Right_triangle::getShapeType() {}
 
 
 

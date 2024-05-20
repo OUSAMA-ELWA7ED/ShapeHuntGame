@@ -385,23 +385,48 @@ operSelect_level::operSelect_level(game* r_pGame):operation(r_pGame)
 {}
 void operSelect_level::Act()
 {
-
-Levels* lvl=pGame->getLevel();
-	switch(*lvl)
+	char cKeyData;
+	keytype ktInput;
+	window* pWind = pGame->getWind();
+	ktInput = pWind->WaitKeyPress(cKeyData);
+	Levels* lvl = pGame->getLevel();
+	//if(ktInput == ARROW && cKeyData == '1' || ) // how to make one switch instead of these two switches
+	//switch (cKeyData)
+	//{
+	//case LVL1:
+	//	pGame->setLevel(LVL1);
+	//	break;
+	//case LVL2:
+	//	pGame->setLevel(LVL2);
+	//	break;
+	//case LVL3:
+	//	pGame->setLevel(LVL3);
+	//	break;
+	//case LVL4:
+	//	pGame->setLevel(LVL4);
+	//	break;
+	//case LVL5:
+	//	pGame->setLevel(LVL5);
+	//	break;
+	//}
+		
+		switch (*lvl)
 		{
-			case LVL1 :pGame->setLevel(LVL1);
+		case LVL1:
+			pGame->setLevel(LVL1);
 			break;
-			case LVL2 :pGame->setLevel(LVL2);
+		case LVL2:
+			pGame->setLevel(LVL2);
 			break;
-			case LVL3 :pGame->setLevel(LVL3);
+		case LVL3:
+			pGame->setLevel(LVL3);
 			break;
-			case LVL4 :pGame->setLevel(LVL4);
+		case LVL4:
+			pGame->setLevel(LVL4);
 			break;
-			case LVL5 :pGame->setLevel(LVL5);
+		case LVL5:
+			pGame->setLevel(LVL5);
 			break;
-			default:pGame->setLevel(LVL1);
-			break;
-			
 		}
 }
 

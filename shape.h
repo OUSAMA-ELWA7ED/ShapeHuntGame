@@ -89,11 +89,6 @@ struct point
 enum ShapeType
 {
 	//Basic shapes
-	RCT,	//rectangle
-	CRC,	//circle
-	EQ_TRI,	//triangle
-	ISO_TRI,
-	RIGHT_TRI,
 	SIGN,
 	I,
 	House,

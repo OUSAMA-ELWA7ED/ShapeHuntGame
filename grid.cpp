@@ -4,10 +4,10 @@
 #include "CompositeShapes.h"
 #include <cstdlib>
 #include <time.h>
-//#include "RandomShape.h"
 
 grid::grid(point r_uprleft, int wdth, int hght, game* pG)
 {
+	MatchedShapeIndex = NULL;
 	uprLeft = r_uprleft;
 	height = hght;
 	width = wdth;
@@ -224,11 +224,4 @@ void grid::createRandomShape()
 		}
 		}
 	}
-}
-
-void grid::countSteps(shape* avtv)
-{
-	int steps = 0;
-	
-
 }
