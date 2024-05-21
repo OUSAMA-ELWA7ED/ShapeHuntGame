@@ -651,51 +651,64 @@ void Cap::flip() {}
 //=====================================================
 void Cap::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 10 << endl;
 	OutFile << MidTriRef.x << endl;
 	OutFile << MidTriRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
-
+	OutFile.close();
 }
 void Envelope::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 20 << endl;
 	OutFile << BodyRectRef.x << endl;
 	OutFile << BodyRectRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
 void Blender::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 30 << endl;
 	OutFile << BodyRectRef.x << endl;
 	OutFile << BodyRectRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
 void rocket::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 40 << endl;
 	OutFile << baseRectRef.x << endl;
 	OutFile << baseRectRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
 void cHouse::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 50 << endl;
 	OutFile << baseRef.x << endl;
 	OutFile << baseRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
 void I_Shape::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 60 << endl;
 	OutFile << midRef.x << endl;
 	OutFile << midRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
 void Sign::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 70 << endl;
 	OutFile << topRef.x << endl;
 	OutFile << topRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
