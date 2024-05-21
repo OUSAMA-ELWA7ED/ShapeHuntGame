@@ -2,25 +2,7 @@
 #include "Basicshapes.h"
 
 
-////////////////////////////////////////////////////  class Sign  ///////////////////////////////////////
-//This class reprsents the composite shape "sign"
-//The sign is composed of 2 Recatngles
-/*				
 
-					 ------------------
-					|				   |
-					|		 x		   |     x is the reference point of the Sign shape
-					|			       |
-					 ------------------
-						   |   |
-						   |   |
-						   | . |
-						   |   |
-						   |   |
-							---
-*/
-
-//Note: sign reference point is the center point of the top rectangle
 class Sign : public shape
 {
 	Rect* base;
@@ -40,6 +22,7 @@ public:
 	virtual void resizeDown() override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 	//void move();
 	//virtual void move() override;
 
@@ -70,6 +53,7 @@ public:
 	virtual void resizeDown() override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 };
 
 class cHouse : public shape
@@ -92,14 +76,15 @@ public:
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
-	//virtual void move() override;
+	virtual void DontExceed() override;
+	
 };
 
 
 
 class rocket : public shape
 {
-	point baseRectRef;
+	point& baseRectRef = RefPoint;
 	point headTriRef;
 	point RightLowerTriRef;
 	point LeftLowerTriRef;
@@ -121,11 +106,12 @@ public:
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 };
 
 
 class Blender : public shape {
-	point BodyRectRef;
+	point& BodyRectRef = RefPoint;
 	point TopRectRef;
 	point TopCircleRef;
 	point LowerRectRef;
@@ -150,13 +136,14 @@ public:
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 };
 
 
 
 class Envelope : public shape
 {
-	point BodyRectRef;
+	point& BodyRectRef = RefPoint;
 	point TopRectRef;
 	point UpperTriRightRef;
 	point UpperTriLeftRef;
@@ -177,13 +164,14 @@ public:
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 };
 
 
 
 class Cap : public shape
 {
-	point MidTriRef;
+	point& MidTriRef = RefPoint;
 	point TopCircleRef;
 	point BaseRectRef;
 	Rect* baseRect;
@@ -202,6 +190,7 @@ public:
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 };
 
 

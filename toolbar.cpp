@@ -36,6 +36,7 @@ toolbar::toolbar(game* pG)
 	toolbarItemImages[ITM_I] = "images\\toolbarItems\\I_Shape.jpg";
 	toolbarItemImages[ITM_DEL] = "images\\toolbarItems\\Delete.jpg";
 	toolbarItemImages[ITM_REFRESH] = "images\\toolbarItems\\Refresh2.jpg";
+	toolbarItemImages[ITM_SLCTLVL] = "images\\toolbarItems\\SelectLevel.jpg";
 	
 	
 	//TODO: Prepare image for each toolbar item and add it to the list
@@ -50,20 +51,20 @@ toolbar::toolbar(game* pG)
 	pWind->DrawLine(0, height, width, height);
 }
 //new by ebrahim2
- void toolbar::GameStat(){
-
-	window* pWind = pGame->getWind();
-	NumOfSteps = pGame->getNumberOfSteps();
-	//new by ebrahim
-		//Draw a game status
-	pWind->SetPen(BLACK, 1);
-	pWind->SetFont(20, BOLD | ITALICIZED, BY_NAME, "Arial");
-	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight, "Lives:" + to_string(live));
-	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight - config.seprator, "Score:" + to_string(score));
-	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight - 2 * (config.seprator), "Level:" + to_string(level));
-	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight +  (config.seprator), "Steps:" + to_string(*NumOfSteps));
-	//pWind->~window();
-}
+// void toolbar::GameStat(){
+//
+//	window* pWind = pGame->getWind();
+//	NumOfSteps = pGame->getNumberOfSteps();
+//	//new by ebrahim
+//		//Draw a game status
+//	pWind->SetPen(BLACK, 1);
+//	pWind->SetFont(20, BOLD | ITALICIZED, BY_NAME, "Arial");
+//	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight, "Lives:" + to_string(live));
+//	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight - config.seprator, "Score:" + to_string(score));
+//	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight - 2 * (config.seprator), "Level:" + to_string(level));
+//	pWind->DrawString(config.GameStatusWidth, config.GameStatusHeight +  (config.seprator), "Steps:" + to_string(*NumOfSteps));
+//	//pWind->~window();
+//}
 
  
 
