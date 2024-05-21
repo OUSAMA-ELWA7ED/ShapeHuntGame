@@ -72,6 +72,11 @@ void Rect::move(int step, bool isVerical)
 	RefPoint.move(step, isVerical);
 }
 
+void Rect::setRefPoint(point newRef)
+{
+	RefPoint = newRef;
+	calcCorners();
+}
 
 
 point* Rect::getLowerBottom() { return &lowerBottom; }
@@ -124,6 +129,13 @@ void circle::resizeDown()
 	rad /= 2;
 }
 
+
+ShapeType circle::getShapeType() { return type = CRC; }
+void circle::setRefPoint(point newRef)
+{
+	RefPoint = newRef;
+	calcCorners();
+}
 ShapeType circle::getShapeType() { return ShapeEnd; }
 
 
@@ -197,7 +209,16 @@ void Equi_triangle::resizeDown()
 	rightLowerPoint.x = RefPoint.x + base / 2;
 }
 
+void Equi_triangle::setRefPoint(point newRef)
+{
+	RefPoint = newRef;
+	calcCorners();
+}
+ShapeType Equi_triangle::getShapeType() { return type = EQ_TRI; }
+
+
 ShapeType Equi_triangle::getShapeType() { return ShapeEnd; }
+
 
 Isso_triangle::Isso_triangle(game* r_pGame, point ref, int Base,int Height) : shape(r_pGame, ref)
 {
@@ -301,7 +322,16 @@ void Isso_triangle::resizeDown() {
 	base = newBase;
 }
 
+void Isso_triangle::setRefPoint(point newRef)
+{
+	RefPoint = newRef;
+	calcCorners();
+}
+ShapeType Isso_triangle::getShapeType() { return type = ISO_TRI; }
+
+
 ShapeType Isso_triangle::getShapeType() { return ShapeEnd; }
+
 
 Right_triangle::Right_triangle(game* r_pGame, point ref, int Base, int Height) : shape(r_pGame, ref)
 {
@@ -349,16 +379,24 @@ point* Right_triangle::getUpperPoint() { return &upperPoint; }
 point* Right_triangle::getleftLower() { return &leftLowerPoint; }
 point* Right_triangle::getrightLowerPoint() { return &rightLowerPoint; }
 
-void Right_triangle::calcCorners(){}
+void Right_triangle::calcCorners(){
+	upperPoint.x = RefPoint.x;
+	upperPoint.y = RefPoint.y - height;
+
+	leftLowerPoint.x = RefPoint.x + base;
+	leftLowerPoint.y = RefPoint.y;
+
+
+	rightLowerPoint.x = RefPoint.x ;
+	rightLowerPoint.y = RefPoint.y ;
+	
+}
 
 void Right_triangle::resizeUp()
 {
 	base *= 2; // Double the base
 	height *= 2; // Double the height
-
-	// Recalculate the position of the lower right vertex
-	rightLowerPoint.x = RefPoint.x + base;
-	rightLowerPoint.y = RefPoint.y;
+	calcCorners();
 }
 
 
@@ -366,10 +404,7 @@ void Right_triangle::resizeDown()
 {
 	base /= 2; // Halve the base
 	height /= 2; // Halve the height
-
-	// Recalculate the position of the lower right vertex
-	rightLowerPoint.x = RefPoint.x + base;
-	rightLowerPoint.y = RefPoint.y;
+	calcCorners();
 }
 
 ShapeType Right_triangle::getShapeType() { return ShapeEnd; }
@@ -378,15 +413,41 @@ ShapeType Right_triangle::getShapeType() { return ShapeEnd; }
 
 
 
-void Rect::flip(){}
-void circle::flip(){}
+void Rect::flip() {
+	int centerY = (upperLeft.y + lowerBottom.y) / 2;
+	upperLeft.y = 2 * centerY - upperLeft.y;
+	lowerBottom.y = 2 * centerY - lowerBottom.y;
+	calcCorners();
+}
+
+void circle::flip() {
+	RefPoint.y = -RefPoint.y;
+	calcCorners();
+}
 void Isso_triangle::flip()
 {
 	upperPoint.flip(RefPoint);
 	leftLowerPoint.flip(upperPoint);
 }
-void Equi_triangle::flip(){}
-void Right_triangle::flip(){}
+void Equi_triangle::flip() {
+	int centerY = (upperPoint.y + leftLowerPoint.y + rightLowerPoint.y) / 3;
+	upperPoint.y = 2 * centerY - upperPoint.y;
+	leftLowerPoint.y = 2 * centerY - leftLowerPoint.y;
+	rightLowerPoint.y = 2 * centerY - rightLowerPoint.y;
+	calcCorners();
+}
+void Right_triangle::flip() {
+	int centerY = (upperPoint.y + leftLowerPoint.y + rightLowerPoint.y) / 3;
+	upperPoint.y = 2 * centerY - upperPoint.y;
+	leftLowerPoint.y = 2 * centerY - leftLowerPoint.y;
+	rightLowerPoint.y = 2 * centerY - rightLowerPoint.y;
+	calcCorners();
+}
+void Right_triangle::setRefPoint(point newRef)
+{
+	RefPoint = newRef;
+	calcCorners();
+}
 //save collection by ebrahim 3
 void Rect::save(ofstream& OutFile) {
 
