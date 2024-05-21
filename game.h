@@ -13,7 +13,7 @@ enum Levels
 	LVL5,
 };
 
-//Main class that coordinates the game operation
+
 class game
 {
 
@@ -24,12 +24,18 @@ class game
 	grid* shapesGrid;
 	window* ExitWindow;
 	Levels* lvl = nullptr;
+	Levels currentLevel = LVL1;
 	int NumberOfSteps = 5;
+	int steps = 200;
+	int score = 0;
+	
+	
 
 public:
 	game();
 	~game();
-
+	int* countSteps();
+	int* getScore();
 	string getSrting() const;	 //Returns a string entered by the user
 	void createWind(int, int, int, int); //creates the game window
 	void clearStatusBar() const;	//Clears the status bar
@@ -39,12 +45,10 @@ public:
 	window* getWind() const;		//returns a pointer to the graphics window
 	grid* getGrid() const;		//returns a pointer to the shapes grid
 	int* getNumberOfSteps();
-	//creates an operation according to the toolbar item clicked
 	operation* createRequiredOperation(toolbarItem clickedItem);
 	Levels* getLevel();
 	void setLevel(Levels level);
-	
-
+	void LevelIsChanging(Levels* level);
 	void run();	//start the game
 
 };

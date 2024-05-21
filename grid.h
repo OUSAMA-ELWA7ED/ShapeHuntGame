@@ -34,7 +34,9 @@ public:
 	bool matchingCheck();
 	int getMatchedShapeIndex();
 	void editShapeList(int Index, shape* Value, bool wannaRemove);
+	void clearShapeList();
 	void resetShapeCount();
+	bool checkShapeList();
 	void save();
 };
 

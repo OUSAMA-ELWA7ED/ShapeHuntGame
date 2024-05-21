@@ -45,14 +45,10 @@ struct point
 		int x1 = x, y1 = y;
 		x1 += config.gridSpacing; y1 += config.gridSpacing;
 
-		if (isItExceeded(x1, y1) == false) {
 			if (isVertical == false)
 				x += step; //int = 30;
 			else if (isVertical == true)
 				y += step;
-		}
-		else
-			return;
 	}
 
 	void flip(point pnt)
@@ -78,12 +74,37 @@ struct point
 		return false;
 	}
 
+	point& operator-=(const int& value) {
+		x -= value;
+		y -= value;
+		return *this;
+	}
 	friend std::ostream& operator <<(std::ostream& out, const point& other)
 	{
 		out << "x: " << other.x << " " << "y: " << other.y;
 		return out;
 	}
 
+	bool DontExceed(int distance)
+	{
+		if (x > 1200) {
+			x -= distance;
+			return true;
+		}
+		if (x < 0) {
+			x += distance;
+			return true;
+		}
+		if (y > 550) {
+			y -= distance;
+			return true;
+		}
+		if (y < 60) {
+			y += distance;
+			return true;
+		}
+		return false;
+	}
 };
 
 enum ShapeType
@@ -118,6 +139,7 @@ protected:
 	int iRotationAngle = 0;
 	int iResizeCalls = 0;
 	ShapeType type;
+	int ShapeSafeBoundaries;
 	//int iRotationCalls = 0;
 public:
 	shape(game* r_pGame, point ref);
@@ -138,7 +160,7 @@ public:
 	virtual int getNumberOfResizeCalls();
 	virtual void save(ofstream &OutFile) = 0;	//Save the shape parameters to the file
 	//virtual void load(ifstream &Infile) = 0;	//Load the shape parameters to the file
-
+	virtual void DontExceed() = 0;
 	virtual ShapeType getShapeType() = 0;
 };
 
