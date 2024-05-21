@@ -35,6 +35,7 @@ public:
 	void editShapeList(int Index, shape* Value, bool wannaRemove);
 	void resetShapeCount();
 	void save();
+	void Hint();
 };
 
 
