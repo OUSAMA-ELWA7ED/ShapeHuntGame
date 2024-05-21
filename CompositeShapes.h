@@ -2,25 +2,7 @@
 #include "Basicshapes.h"
 
 
-////////////////////////////////////////////////////  class Sign  ///////////////////////////////////////
-//This class reprsents the composite shape "sign"
-//The sign is composed of 2 Recatngles
-/*				
 
-					 ------------------
-					|				   |
-					|		 x		   |     x is the reference point of the Sign shape
-					|			       |
-					 ------------------
-						   |   |
-						   |   |
-						   | . |
-						   |   |
-						   |   |
-							---
-*/
-
-//Note: sign reference point is the center point of the top rectangle
 class Sign : public shape
 {
 	Rect* base;
@@ -29,6 +11,10 @@ class Sign : public shape
 	point baseRef;
 	int refpointx;
 	int refpointy;
+	int csth;
+	int cstw;
+	int csbh;
+	int csbw;
 public:
 	Sign(game* r_pGame, point ref);
 	virtual void draw();
@@ -40,6 +26,7 @@ public:
 	virtual void resizeDown() override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 	//void move();
 	//virtual void move() override;
 
@@ -58,6 +45,12 @@ class I_Shape : public shape // Ref at mid rect
 	point& midRef = RefPoint;
 	point topRef;
 	point baseRef;
+	int midHeight;
+	int midWidth;
+	int topHeight;
+	int topWidth;
+	int baseHeight;
+	int baseWidth;
 public:
 	I_Shape(game* r_pGame, point ref);
 	virtual void draw();
@@ -70,6 +63,7 @@ public:
 	virtual void resizeDown() override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 };
 
 class cHouse : public shape
@@ -81,6 +75,10 @@ class cHouse : public shape
 	int refpointx;
 	int refpointy;
 	//circle* test;
+	int baseHeight;
+	int baseWidth;
+	int headBase;
+	int headHeight;
 public:
 	cHouse(game* r_pGame, point ref);
 	virtual void draw();
@@ -92,14 +90,15 @@ public:
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
-	//virtual void move() override;
+	virtual void DontExceed() override;
+	
 };
 
 
 
 class rocket : public shape
 {
-	point baseRectRef;
+	point& baseRectRef = RefPoint;
 	point headTriRef;
 	point RightLowerTriRef;
 	point LeftLowerTriRef;
@@ -109,6 +108,14 @@ class rocket : public shape
 	Right_triangle* triangle_pBottomLeft;
 	int refpointx;
 	int refpointy;
+	int baseRectHeight;
+	int baseRectWidth;
+	int headTriBase;
+	int headTriHeight;
+	int LowerRightTriWidth;
+	int LowerRightTriHeight;
+	int LowerLeftTriWidth;
+	int LowerLeftTriHeight;
 
 public:
 	rocket(game* r_pGame, point ref);
@@ -121,11 +128,12 @@ public:
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 };
 
 
 class Blender : public shape {
-	point BodyRectRef;
+	point& BodyRectRef = RefPoint;
 	point TopRectRef;
 	point TopCircleRef;
 	point LowerRectRef;
@@ -139,6 +147,17 @@ class Blender : public shape {
 	Right_triangle* triangle_pBottomLeft;
 	int refpointx;
 	int refpointy;
+	int Rect1Height;
+	int Rect1Width;
+	int Rect2Height;
+	int Rect2Width;
+	int Rect3Height;
+	int Rect3Width;
+	int circleRad;
+	int RTriBase;
+	int RTriHeight;
+	int LTriBase;
+	int LTriHeight;
 public:
 	Blender(game* r_pGame, point ref);
 	virtual void draw();
@@ -150,13 +169,14 @@ public:
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 };
 
 
 
 class Envelope : public shape
 {
-	point BodyRectRef;
+	point& BodyRectRef = RefPoint;
 	point TopRectRef;
 	point UpperTriRightRef;
 	point UpperTriLeftRef;
@@ -166,6 +186,10 @@ class Envelope : public shape
 	Right_triangle* TriLeft;
 	int refpointx;
 	int refpointy;
+	int RectHeight;
+	int RectWidth;
+	int TriBase;
+	int TriHeight;
 public:
 	Envelope(game* r_pGame, point ref);
 	virtual void draw();
@@ -177,13 +201,14 @@ public:
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 };
 
 
 
 class Cap : public shape
 {
-	point MidTriRef;
+	point& MidTriRef = RefPoint;
 	point TopCircleRef;
 	point BaseRectRef;
 	Rect* baseRect;
@@ -191,6 +216,11 @@ class Cap : public shape
 	circle* topCircle;
 	int refpointx;
 	int refpointy;
+	int RectHeight;
+	int RectWidth;
+	int TriBase;
+	int TriHeight;
+	int circlerad;
 public:
 	Cap(game* r_pGame, point ref);
 	virtual void draw();
@@ -202,6 +232,7 @@ public:
 	virtual void resizeDown()override;
 	virtual ShapeType getShapeType() override;
 	virtual void save(ofstream& OutFile);
+	virtual void DontExceed() override;
 };
 
 
