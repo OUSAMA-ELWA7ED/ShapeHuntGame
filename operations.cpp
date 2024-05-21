@@ -312,41 +312,10 @@ operExit::operExit(game* r_pGame) : operation(r_pGame)
 
 void operExit::Act()
 		{
-	int width = 320; // Adjust according to your needs
-	int height = 200;
-	int x = 400; // Adjust the position of the window
-	int y = 200;
-	window* win = new window(width, height, x,y);
-	image test("images\\toolbarItems\\YesButton.jpg", JPEG);
-    win->DrawImage(test, x +10 , y + 50, 20, 25);
-	win->SetFont(20, BOLD, BY_NAME, "Arial");
-	win->SetPen(BLUE, 5);
-	win->DrawString(20, 10, "Testtttttttttttttttt");
-	win->SetBuffering(true);
-	//win->DrawImage("images\\toolbarItems\\NoButton.jpg", x + 50, y + 50, 100, 50);
-	while (true) {
+	window* psave = pGame->getWind();
+	grid* pGrid = pGame->getGrid();
 
-		int clickedX, clickedY;
-		win->WaitMouseClick(clickedX, clickedY);
-
-		// Check if the click is within the "Yes" button
-		if (clickedX >= x + 50 && clickedX <= x + 150 &&
-			clickedY >= y + 50 && clickedY <= y + 100) {
-			// Save and exit
-			//operSave();
-			exit(0);
-		}
-		
-		// Check if the click is within the "No" button
-		else if (clickedX >= x + 150 && clickedX <= x + 250 &&
-			clickedY >= y + 50 && clickedY <= y + 100) {
-			// Just exit
-			exit(0);
-			
-		}
-		
-	}
-	
+	pGrid->save();
 }
 		
 void operFlip::Act()
@@ -405,8 +374,15 @@ Levels* lvl=pGame->getLevel();
 		}
 }
 
-CallHint::CallHint(game* r_pGame) : operation(r_pGame){}
-void CallHint::Act(){}
+Hint::Hint(game* r_pGame) : operation(r_pGame)
+{
+
+}
+void Hint::Act()
+{
+	grid* pGrid = pGame->getGrid();
+	pGrid->Hint();
+}
 
 Refresh::Refresh(game* r_pGame) : operation(r_pGame)
 {}
