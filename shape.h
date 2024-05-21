@@ -158,6 +158,10 @@ public:
 	virtual void resizeDown() = 0;	//Resize the shape down
 	virtual int getRotationAngle();
 	virtual int getNumberOfResizeCalls();
+
+	void setcolor(color color);
+	//virtual void save(ofstream &OutFile) = 0;	//Save the shape parameters to the file
+
 	virtual void save(ofstream &OutFile) = 0;	//Save the shape parameters to the file
 	//virtual void load(ifstream &Infile) = 0;	//Load the shape parameters to the file
 	virtual void DontExceed() = 0;
