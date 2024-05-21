@@ -1,9 +1,11 @@
 #include "CompositeShapes.h"
 #include "gameConfig.h"
+#include <fstream>
 
 ////////////////////////////////////////////////////  class Sign  ///////////////////////////////////////
 Sign::Sign(game* r_pGame, point ref) :shape(r_pGame, ref)
 {
+	ShapeSafeBoundaries = config.sighShape.baseHeight + 0.5 * config.sighShape.topHeight;
 	//calc the ref point of the Sign base and top rectangles relative to the Sign shape
 	topRef = ref;	//top rect ref is the same as the sign
 	baseRef = { ref.x, ref.y + config.sighShape.topHeight / 2 + config.sighShape.baseHeight / 2 };
@@ -11,7 +13,11 @@ Sign::Sign(game* r_pGame, point ref) :shape(r_pGame, ref)
 	base = new Rect(pGame, baseRef, config.sighShape.baseHeight, config.sighShape.baseWdth);
 }
 
-void Sign::calcCorners() {}
+void Sign::calcCorners() 
+{
+	top->calcCorners();
+	base->calcCorners();
+}
 
 void Sign::draw() 
 {
@@ -19,6 +25,7 @@ void Sign::draw()
 	base->draw();
 	top->SetColor(BEIGE);
 	top->draw();
+
 
 }
 
@@ -32,10 +39,10 @@ void Sign::rotate()
 
 void Sign::move(int step, bool isVerical)
 {
+	topRef.move(step, isVerical);
 	top->move(step, isVerical);
 	base->move(step, isVerical);
-	topRef.move(step, isVerical);
-	//RefPoint.move(step, isVerical);
+	calcCorners();
 
 }
 void Sign::resizeUp()
@@ -91,6 +98,11 @@ I_Shape::I_Shape(game* r_pGame, point ref) : shape(r_pGame, ref)
 
 void I_Shape::rotate()
 {
+	rect_pMid->rotate();
+	top->getLowerBottom()->rotate(midRef);
+	top->getLowerBottom()->rotate(midRef);
+	base->getLowerBottom()->rotate(midRef);
+	base->getLowerBottom()->rotate(midRef);
 	
 }
 
@@ -100,6 +112,7 @@ void I_Shape::move(int step, bool isVerical)
 	top->move(step, isVerical);
 	rect_pMid->move(step, isVerical);
 	midRef.move(step, isVerical);
+	calcCorners();
 	
 }
 
@@ -176,8 +189,6 @@ void cHouse::draw()
 	base->draw();
 	head->SetColor(BLUE);
 	head->draw();
-	
-	//test->draw();
 }
 
 void cHouse::calcCorners() 
@@ -186,16 +197,40 @@ void cHouse::calcCorners()
 	base->calcCorners();
 }
 
-void rocket::calcCorners() {}
-void Blender::calcCorners() {}
-void Envelope::calcCorners() {}
-void Cap::calcCorners() {}
+void rocket::calcCorners() 
+{
+	baseRect->calcCorners();
+	headIsso->calcCorners();
+	triangle_pBottomRight->calcCorners();
+	triangle_pBottomLeft->calcCorners();
+
+}
+void Blender::calcCorners() 
+{
+	TopRect->calcCorners();
+	BodyRect->calcCorners();
+	LowerRect->calcCorners();
+	TopCircle->calcCorners();
+	triangle_pBottomRight->calcCorners();
+	triangle_pBottomLeft->calcCorners();
+}
+void Envelope::calcCorners() 
+{
+	BodyRect->calcCorners();
+	TopRect->calcCorners();
+	TriRight->calcCorners();
+	TriLeft->calcCorners();
+}
+void Cap::calcCorners() 
+{
+	baseRect->calcCorners();
+	midTri->calcCorners();
+	topCircle->calcCorners();
+}
 
 void cHouse::rotate()
 {
 	base->rotate();
-	//head->rotate();
-
 	head->getRightLower()->rotate(baseRef);
 	head->getleftLower()->rotate(baseRef);
 	head->getUpperPoint()->rotate(baseRef);
@@ -208,10 +243,6 @@ void cHouse::resizeUp()
 	config.House.headHeight *= 2;
 	config.House.baseHeight *= 2;
 	headRef = { refpointx, refpointy - config.House.baseHeight /2 };
-	// ===================================================================
-	
-	//draw();
-
 	calcCorners();
 }
 
@@ -235,9 +266,6 @@ void cHouse::resizeDown()
 	config.House.headHeight/=2;
 	config.House.baseHeight /= 2;
 	headRef = { refpointx, refpointy - config.House.baseHeight / 2 };
-	// ===================================================================
-	
-	//draw();
 	
 	calcCorners();
 }
@@ -247,6 +275,7 @@ void cHouse::move(int step, bool isVerical)
 	head->move(step, isVerical);
 	base->move(step, isVerical);
 	baseRef.move(step, isVerical);
+	calcCorners();
 }
 
 ShapeType cHouse::getShapeType() { return type = House; }
@@ -340,6 +369,15 @@ void rocket::resizeDown()
 
 void rocket::move(int step, bool isVerical)
 {
+	baseRectRef.move(step, isVerical);
+	headTriRef.move(step, isVerical);
+	RightLowerTriRef.move(step, isVerical);
+	LeftLowerTriRef.move(step, isVerical);
+	baseRect->move(step, isVerical);
+	headIsso->move(step, isVerical);
+	triangle_pBottomLeft->move(step, isVerical);
+	triangle_pBottomRight->move(step, isVerical);
+	calcCorners();
 }
 
 ShapeType rocket::getShapeType() { return type = Rocket; }
@@ -391,7 +429,25 @@ void Blender::rotate()
 
 }
 
-void Blender::move(int step, bool isVerical){}
+void Blender::move(int step, bool isVerical)
+{
+	BodyRectRef.move(step, isVerical);
+	TopRectRef.move(step, isVerical);
+	TopCircleRef.move(step, isVerical);
+	LowerRectRef.move(step, isVerical);
+	RightLowerTriRef.move(step, isVerical);
+	LeftLowerTriRef.move(step, isVerical);
+	TopCircle->move(step, isVerical);
+	TopRect->move(step, isVerical);
+	BodyRect->move(step, isVerical);
+	LowerRect->move(step, isVerical);
+	triangle_pBottomRight->move(step, isVerical);
+	triangle_pBottomLeft->move(step, isVerical);
+	calcCorners();
+}
+
+
+
 void Blender::resizeUp()
 {
 	/*BodyRect->resizeUp();
@@ -541,7 +597,26 @@ void Envelope::resizeDown()
 	calcCorners();
 }
 
-void Envelope::move(int step, bool isVerical){}
+void Envelope::move(int step, bool isVerical)
+{
+	BodyRectRef.move(step, isVerical);
+	TopRectRef.move(step, isVerical);
+	UpperTriRightRef.move(step, isVerical);
+	UpperTriLeftRef.move(step, isVerical);
+	BodyRect->move(step, isVerical);
+	TopRect->move(step, isVerical);
+	TriRight->move(step, isVerical);
+	TriLeft->move(step, isVerical);
+	/*TriRight->getleftLower()->move(step, isVerical);
+	TriRight->getrightLowerPoint()->move(step, isVerical);
+	TriRight->getUpperPoint()->move(step, isVerical);
+	TriLeft->getleftLower()->move(step, isVerical);
+	TriLeft->getrightLowerPoint()->move(step, isVerical);
+	TriLeft->getUpperPoint()->move(step, isVerical);*/
+	
+
+}
+
 ShapeType Envelope::getShapeType() { return type = envelop; }
 
 Cap::Cap(game* r_pGame, point ref) :shape(r_pGame, ref) {
@@ -618,7 +693,15 @@ void Cap::resizeDown()
 }
 
 
-void Cap::move(int step, bool isVerical){}
+void Cap::move(int step, bool isVerical)
+{
+	MidTriRef.move(step, isVerical);
+	TopCircleRef.move(step, isVerical);
+	BaseRectRef.move(step, isVerical);
+	baseRect->move(step, isVerical);
+	midTri->move(step, isVerical);
+	topCircle->move(step, isVerical);
+}
 
 ShapeType Cap::getShapeType() { return type = cap; }
 
@@ -651,51 +734,85 @@ void Cap::flip() {}
 //=====================================================
 void Cap::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 10 << endl;
 	OutFile << MidTriRef.x << endl;
 	OutFile << MidTriRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
-
+	OutFile.close();
 }
 void Envelope::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 20 << endl;
 	OutFile << BodyRectRef.x << endl;
 	OutFile << BodyRectRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
 void Blender::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 30 << endl;
 	OutFile << BodyRectRef.x << endl;
 	OutFile << BodyRectRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
 void rocket::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 40 << endl;
 	OutFile << baseRectRef.x << endl;
 	OutFile << baseRectRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
 void cHouse::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 50 << endl;
 	OutFile << baseRef.x << endl;
 	OutFile << baseRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
 void I_Shape::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 60 << endl;
 	OutFile << midRef.x << endl;
 	OutFile << midRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
 void Sign::save(ofstream& OutFile) {
 	OutFile.open("savedata.txt");
+	OutFile << 70 << endl;
 	OutFile << topRef.x << endl;
 	OutFile << topRef.y << endl;
 	OutFile << iResizeCalls << endl;
 	OutFile << iRotationAngle << endl;
+	OutFile.close();
 }
+
+
+void Sign::DontExceed()
+{
+	
+	if (top->getLowerBottom()->DontExceed(ShapeSafeBoundaries))
+	{
+		topRef -= 300;
+		calcCorners();
+		draw();
+	}
+}
+void I_Shape::DontExceed()
+{
+
+}
+void rocket::DontExceed(){}
+void Blender::DontExceed(){}
+void Cap::DontExceed(){}
+void Envelope::DontExceed(){}
+void cHouse::DontExceed(){}

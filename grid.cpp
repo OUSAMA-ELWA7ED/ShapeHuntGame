@@ -4,10 +4,10 @@
 #include "CompositeShapes.h"
 #include <cstdlib>
 #include <time.h>
-//#include "RandomShape.h"
 
 grid::grid(point r_uprleft, int wdth, int hght, game* pG)
 {
+	MatchedShapeIndex = NULL;
 	uprLeft = r_uprleft;
 	height = hght;
 	width = wdth;
@@ -49,6 +49,22 @@ void grid::draw() const
 	if (activeShape) {
 		activeShape->draw();
 	}
+
+	int* steps = pGame->countSteps();
+	int* score = pGame->getScore();
+
+	pWind->DrawString((config.GameStatusWidth), (config.GameStatusHeight) * 2 + (config.seprator), "steps: ");
+
+
+	pWind->DrawInteger((config.GameStatusWidth) + 50, (config.GameStatusHeight) * 2 + (config.seprator), (*steps));
+
+
+	pWind->DrawString((config.GameStatusWidth), (config.GameStatusHeight) * 2.5 + config.seprator, "Score: ");
+
+	pWind->DrawInteger((config.GameStatusWidth) + 50, (config.GameStatusHeight) * 2.5 + (config.seprator), (*score));
+
+	pWind->DrawString((config.GameStatusWidth), (config.GameStatusHeight) * 2.9 + config.seprator, "counter: ");
+
 }
 
 void grid::clearGridArea() const
@@ -62,7 +78,7 @@ void grid::clearGridArea() const
 
 bool grid::matchingCheck()
 {
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		if (!shapeList[i])
 			continue;
@@ -126,17 +142,25 @@ void grid::setActiveShape(shape* actShape)
 
 
 shape* grid::getActiveShape() const { return activeShape; }
+bool grid::checkShapeList()
+{
+	for (int i = 0; i < shapeCount; i++)
+		if (shapeList)
+			return true;
+	return false;
+}
 
 void grid::deleteActiveShape()
 {
 	delete activeShape;
 	activeShape = nullptr;
 }
-#include <iostream>
+
+
 void grid::createRandomShape()
 {
-	Levels CurrentLevel = LVL4;
-	//Levels CurrentLevel = *pGame->getLevel();
+	//Levels CurrentLevel = LVL4;
+	Levels CurrentLevel = *pGame->getLevel();
 	int NumberOfShapes = int(CurrentLevel) * 2 - 1;
 	for (int i = 0; i < NumberOfShapes+1; i++)
 	{
@@ -146,20 +170,24 @@ void grid::createRandomShape()
 			shapeList[i] = nullptr;
 		}
 	}
+
 	
 	// randomChoice
 	srand(time(0));
 	for (int i = 0; i < NumberOfShapes; i++)
 	{
-		
-		point refPoint = { rand() % (config.windWidth + 1), config.gridHeight + rand() % (config.windHeight - config.GameStatusHeight - config.gridHeight + 1) };
+		int constant = 50;
+		point refPoint = { constant + rand() % (config.windWidth - 2 * constant + 1), 25 + config.gridHeight + rand() % (config.windHeight - config.GameStatusHeight - config.gridHeight - 25 - 120 + 1) };
 		point RequiredRefPoint = { refPoint.x - refPoint.x % config.gridSpacing, refPoint.y - refPoint.y % config.gridSpacing };
+		
 		point* ShapesRefPoints = new point[NumberOfShapes];
 		ShapeType stDetector = ShapeType(rand() % (ShapeEnd - 1));
 		switch (stDetector)
 		{
 		case SIGN:
 		{
+			
+			
 			Sign* NewSign = new Sign(pGame, RequiredRefPoint);
 			NewSign->calcCorners();
 			NewSign->draw();
@@ -238,3 +266,11 @@ void grid::save() {
 		shapeList[i]->save(OutFile);
      
 }
+
+void grid::clearShapeList()
+{
+	for (int i = 0; i < shapeCount; i++)
+		shapeList[i] = nullptr;
+	shapeCount = 0;
+}
+

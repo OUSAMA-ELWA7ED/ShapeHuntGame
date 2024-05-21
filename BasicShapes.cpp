@@ -62,19 +62,21 @@ void Rect::rotate()
 {
 	upperLeft.rotate(RefPoint);
 	lowerBottom.rotate(RefPoint);
+	
 }
 
 void Rect::move(int step, bool isVerical)
 {
 	upperLeft.move(step, isVerical);
 	lowerBottom.move(step, isVerical);
+	RefPoint.move(step, isVerical);
 }
 
 
 
 point* Rect::getLowerBottom() { return &lowerBottom; }
 point* Rect::getUpperLeft() { return &upperLeft; }
-ShapeType Rect::getShapeType() { return type = RCT; }
+ShapeType Rect::getShapeType() { return ShapeEnd; }
 
 
 
@@ -122,7 +124,7 @@ void circle::resizeDown()
 	rad /= 2;
 }
 
-ShapeType circle::getShapeType() { return type = CRC; }
+ShapeType circle::getShapeType() { return ShapeEnd; }
 
 
 
@@ -169,7 +171,13 @@ void Equi_triangle::rotate()
 }
 
 
-void Equi_triangle::move(int step, bool isVerical) {}
+void Equi_triangle::move(int step, bool isVerical) 
+{
+	upperPoint.move(step, isVerical);
+	leftLowerPoint.move(step, isVerical);
+	rightLowerPoint.move(step, isVerical);
+	RefPoint.move(step, isVerical);
+}
 // void Equi_triangle::move(){}
 void Equi_triangle::resizeUp()
 {
@@ -189,7 +197,7 @@ void Equi_triangle::resizeDown()
 	rightLowerPoint.x = RefPoint.x + base / 2;
 }
 
-ShapeType Equi_triangle::getShapeType() { return type = EQ_TRI; }
+ShapeType Equi_triangle::getShapeType() { return ShapeEnd; }
 
 Isso_triangle::Isso_triangle(game* r_pGame, point ref, int Base,int Height) : shape(r_pGame, ref)
 {
@@ -235,9 +243,10 @@ void Isso_triangle::rotate()
 
 void Isso_triangle::move(int step, bool isVerical) 
 {
-	upperPoint.move(step,isVerical);
+	upperPoint.move(step, isVerical);
 	leftLowerPoint.move(step, isVerical);
 	rightLowerPoint.move(step, isVerical);
+	RefPoint.move(step, isVerical);
 }
 
 
@@ -292,7 +301,7 @@ void Isso_triangle::resizeDown() {
 	base = newBase;
 }
 
-ShapeType Isso_triangle::getShapeType() { return type = ISO_TRI; }
+ShapeType Isso_triangle::getShapeType() { return ShapeEnd; }
 
 Right_triangle::Right_triangle(game* r_pGame, point ref, int Base, int Height) : shape(r_pGame, ref)
 {
@@ -316,14 +325,25 @@ void Right_triangle::SetColor(color clr)
 }
 void Right_triangle::draw() 
 {
-	window* pW = pGame->getWind();	//get interface window
-	//pW->SetPen(config.penColor, config.penWidth);
-	//pW->SetBrush(config.fillColor);
+	window* pW = pGame->getWind();
 	pW->DrawTriangle(upperPoint.x, upperPoint.y, leftLowerPoint.x, leftLowerPoint.y, rightLowerPoint.x, rightLowerPoint.y, FILLED);
 };
 
-void Right_triangle::rotate() {}
-void Right_triangle::move(int step, bool isVertical) {}
+void Right_triangle::rotate()
+{
+	upperPoint.rotate(RefPoint);
+	leftLowerPoint.rotate(RefPoint);
+	rightLowerPoint.rotate(RefPoint);
+	
+}
+void Right_triangle::move(int step, bool isVertical) 
+{
+	upperPoint.move(step, isVertical);
+	leftLowerPoint.move(step, isVertical);
+	rightLowerPoint.move(step, isVertical);
+	RefPoint.move(step, isVertical);
+
+}
 
 point* Right_triangle::getUpperPoint() { return &upperPoint; }
 point* Right_triangle::getleftLower() { return &leftLowerPoint; }
@@ -352,7 +372,7 @@ void Right_triangle::resizeDown()
 	rightLowerPoint.y = RefPoint.y;
 }
 
-ShapeType Right_triangle::getShapeType() { return type = RIGHT_TRI; }
+ShapeType Right_triangle::getShapeType() { return ShapeEnd; }
 
 
 
@@ -383,3 +403,12 @@ void Equi_triangle::save(ofstream& OutFile) {
 void circle::save(ofstream& OutFile) {
 
 }
+
+
+void Rect::DontExceed()
+{
+}
+void circle::DontExceed(){}
+void Equi_triangle::DontExceed(){}
+void Isso_triangle::DontExceed(){}
+void Right_triangle::DontExceed(){}

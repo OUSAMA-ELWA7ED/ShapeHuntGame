@@ -311,41 +311,7 @@ operExit::operExit(game* r_pGame) : operation(r_pGame)
 	
 
 void operExit::Act()
-		{
-	int width = 320; // Adjust according to your needs
-	int height = 200;
-	int x = 400; // Adjust the position of the window
-	int y = 200;
-	window* win = new window(width, height, x,y);
-	image test("images\\toolbarItems\\YesButton.jpg", JPEG);
-    win->DrawImage(test, x +10 , y + 50, 20, 25);
-	win->SetFont(20, BOLD, BY_NAME, "Arial");
-	win->SetPen(BLUE, 5);
-	win->DrawString(20, 10, "Testtttttttttttttttt");
-	win->SetBuffering(true);
-	//win->DrawImage("images\\toolbarItems\\NoButton.jpg", x + 50, y + 50, 100, 50);
-	while (true) {
-
-		int clickedX, clickedY;
-		win->WaitMouseClick(clickedX, clickedY);
-
-		// Check if the click is within the "Yes" button
-		if (clickedX >= x + 50 && clickedX <= x + 150 &&
-			clickedY >= y + 50 && clickedY <= y + 100) {
-			// Save and exit
-			//operSave();
-			exit(0);
-		}
-		
-		// Check if the click is within the "No" button
-		else if (clickedX >= x + 150 && clickedX <= x + 250 &&
-			clickedY >= y + 50 && clickedY <= y + 100) {
-			// Just exit
-			exit(0);
-			
-		}
-		
-	}
+{
 	
 }
 		
@@ -379,30 +345,39 @@ void operDeleteThisShape::Act()
 //
 //}
 
-
+#include <iostream>
 //file operation.cpp
 operSelect_level::operSelect_level(game* r_pGame):operation(r_pGame)
 {}
 void operSelect_level::Act()
 {
-
-Levels* lvl=pGame->getLevel();
-	switch(*lvl)
+	char cKeyData;
+	keytype ktInput;
+	window* pWind = pGame->getWind();
+	ktInput = pWind->WaitKeyPress(cKeyData);
+	Levels* lvl = pGame->getLevel();
+	if (ktInput == ASCII && (cKeyData == '1' || cKeyData == '2' || cKeyData == '3' || cKeyData == '4' || cKeyData == '5'))
+	{
+		switch (cKeyData)
 		{
-			case LVL1 :pGame->setLevel(LVL1);
+		case '1':
+			pGame->setLevel(LVL1);
 			break;
-			case LVL2 :pGame->setLevel(LVL2);
+		case '2':
+			pGame->setLevel(LVL2);
 			break;
-			case LVL3 :pGame->setLevel(LVL3);
+		case '3':
+			pGame->setLevel(LVL3);
 			break;
-			case LVL4 :pGame->setLevel(LVL4);
+		case '4':
+			pGame->setLevel(LVL4);
 			break;
-			case LVL5 :pGame->setLevel(LVL5);
+		case '5':
+			pGame->setLevel(LVL5);
 			break;
-			default:pGame->setLevel(LVL1);
-			break;
-			
 		}
+	}
+	pGame->clearStatusBar();
 }
 
 CallHint::CallHint(game* r_pGame) : operation(r_pGame){}
