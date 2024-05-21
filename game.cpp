@@ -1,5 +1,6 @@
 #include "game.h"
 #include "gameConfig.h"
+#include "CMUgraphicsLib\auxil.h"
 
 
 
@@ -13,6 +14,7 @@ game::game()
 	//Create and draw the grid
 	createGrid();
 	shapesGrid->draw();
+	setLevel(LVL1);
 	shapesGrid->createRandomShape();
 	//draw the grid and all shapes it contains.
 	clearStatusBar();
@@ -99,17 +101,14 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 	case ITM_ROTATE:
 		op = new operMakeRotation(this);
 		game::printMessage("You Clicked on 'Rotate' Operation");
-		NumberOfSteps++;
 		break;
 	case ITM_DCR:
 		op = new operResizeDown(this);
 		game::printMessage("You Clicked on 'Resize Down' Operation");
-		NumberOfSteps++;
 		break;
 	case ITM_INCR:
 		op = new operResizeUp(this);
 		game::printMessage("You Clicked on 'Resize Up' Operation");
-		NumberOfSteps++;
 		break;
 	case ITM_EXIT:
 		op = new operExit(this);
@@ -122,12 +121,16 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 	case ITM_DEL:
 		op = new operDeleteThisShape(this);
 		game::printMessage("You Clicked on 'Delete' Operation");
-		NumberOfSteps++;
 		break;
 	case ITM_REFRESH:
 		op = new Refresh(this);
 		game::printMessage("You've clicked on 'Refresh' Random Shape has been re-drawn.");
-		NumberOfSteps++;
+		break;
+	case ITM_SLCTLVL:
+		op = new operSelect_level(this);
+		game::printMessage("You're selecting a level, the game won't run until choose a level between 1:5");
+		/*Pause(1000);
+		game::clearStatusBar();*/
 		break;
 	}
 
@@ -136,7 +139,21 @@ operation* game::createRequiredOperation(toolbarItem clickedItem)
 }
 
 
+int* game::countSteps()
+{
 
+	return &steps;
+
+	//delete &steps;
+}
+
+int* game::getScore()
+
+{
+	return &score;
+	//delete &score;
+
+}
 
 void game::printMessage(string msg) const	//Prints a message on status bar
 {
@@ -200,23 +217,40 @@ void game::setLevel(Levels level)
 
 int* game::getNumberOfSteps() { return &NumberOfSteps; }
 
+
+void game::LevelIsChanging(Levels* level)
+{
+	if (currentLevel == *lvl)
+		return;
+	else
+	{
+		grid* pGrid = this->getGrid();
+		pGrid->clearGridArea();
+		pGrid->clearShapeList();
+		pGrid->createRandomShape();
+		pGrid->draw();
+	}
+}
+
+
 #include <iostream>
 
 void game::run()
 {
 	int x, y;
 	bool isExit = false;
-	pWind->ChangeTitle("- - - - - - - - - - SHAPE HUNT (CIE 101 / CIE202 - project) - - - - - - - - - -");
+	pWind->ChangeTitle("SHAPE HUNT (CIE 101 / CIE202 - project)");
 	toolbarItem clickedItem = ITM_CNT;
-	setLevel(LVL1);
-	gameToolbar->GameStat();
+	//setLevel(LVL1);
+	//gameToolbar->GameStat();
 
 
-	//operation* buildRandShape = new RandomShape(this)
+
 	do
 	{
 		pWind->WaitMouseClick(x, y);
 		
+
 		if (steps <= 0) {
 	printMessage("click y to try again, or n to exit");
 
@@ -237,6 +271,10 @@ void game::run()
 	}
 }
 
+		
+
+
+
 		if (y >= 0 && y < config.toolBarHeight)
 		{
 			clickedItem = gameToolbar->getItemClicked(x);
@@ -246,7 +284,7 @@ void game::run()
 			shapesGrid->draw();
 			pWind->FlushMouseQueue();
 			pWind->FlushKeyQueue();
-
+			//delete op;
 		}
 
 		else
@@ -312,6 +350,14 @@ void game::run()
 						clearStatusBar();
 						printMessage("Congrats! You've Matched it Correctly!");
 						shapesGrid->editShapeList(shapesGrid->getMatchedShapeIndex(),nullptr,true);
+						if (!shapesGrid->checkShapeList())
+						{
+								printMessage("Congrat's You've completed this level! go to the Next Level");
+								Pause(2000);
+								Levels* newLevel = new Levels(static_cast<Levels>(*lvl + 1));
+								setLevel(*newLevel);
+								cout << int(*lvl);
+						}
 					}
 					else
 					{
@@ -324,7 +370,7 @@ void game::run()
 
 			} while (stillMoving);
 		}
-
+		LevelIsChanging(getLevel());
 		
 	} while (clickedItem != ITM_EXIT);
 	
